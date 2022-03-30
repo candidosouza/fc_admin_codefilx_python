@@ -2,13 +2,18 @@ import unittest
 
 import unittest
 from datetime import datetime
-from dataclasses import is_dataclass
+from dataclasses import FrozenInstanceError, is_dataclass
 from category.domain.entities import Category
 
 class TestCategoryUnit(unittest.TestCase):
 
     def test_if_is_a_dataclass(self):
         self.assertTrue(is_dataclass(Category))
+
+    def test_is_immutable(self):
+        with self.assertRaises(FrozenInstanceError):
+            category = Category(name='Movie')
+            category.nome = 'Fake'
 
     def test_constructor(self):
         category = Category(name='Movie')
