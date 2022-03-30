@@ -2,7 +2,7 @@ from datetime import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
-@dataclass
+@dataclass(kw_only=True)
 class Category:
 
     name       : str
