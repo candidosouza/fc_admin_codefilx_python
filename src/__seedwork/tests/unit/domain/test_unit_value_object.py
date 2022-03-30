@@ -11,6 +11,15 @@ class TestUniqueEntityIdUnit(unittest.TestCase):
     def test_if_is_a_dataclass(self):
         self.assertTrue(is_dataclass(UniqueEntityId))
 
+    def test_is_immutable(self):
+        with self.assertRaises(FrozenInstanceError):
+            value_object = UniqueEntityId()
+            value_object.id = 'fake id'
+
+    def test_convert_to_string(self):
+        value_object = UniqueEntityId()
+        self.assertEqual(value_object.id, str(value_object))
+
     def test_throw_exception_when_uuid_is_invalid(self):
         with patch.object(
             UniqueEntityId,
@@ -49,8 +58,3 @@ class TestUniqueEntityIdUnit(unittest.TestCase):
             value_object = UniqueEntityId()
             uuid.UUID(value_object.id)
             mock_validate.assert_called_once()
-
-    def test_is_immutable(self):
-        with self.assertRaises(FrozenInstanceError):
-            value_object = UniqueEntityId()
-            value_object.id = 'fake id'
