@@ -1,10 +1,51 @@
+from abc import ABC
+from string import octdigits
 import unittest
 import uuid
-from dataclasses import FrozenInstanceError, is_dataclass
+from dataclasses import FrozenInstanceError, dataclass, is_dataclass
 from unittest.mock import patch
 
-from __seedwork.domain.value_objects import UniqueEntityId
+from __seedwork.domain.value_objects import UniqueEntityId, ValueObject
 from __seedwork.domain.exceptions import InvalidUuidException
+
+
+@dataclass(frozen=True)
+class StubOneProp(ValueObject):
+    prop: str
+
+
+@dataclass(frozen=True)
+class StubTwoProp(ValueObject):
+    prop1: str
+    prop2: str
+
+
+class TestValueObjectUnit(unittest.TestCase):
+    def test_if_is_a_dataclass(self):
+        self.assertTrue(is_dataclass(ValueObject))
+    
+    def test_if_is_a_abc(self):
+        self.assertIsInstance(ValueObject(), ABC)
+
+    def test_init_prop(self):
+        value_object = StubOneProp(prop='value')
+        self.assertEqual(value_object.prop, 'value')
+
+        value1_object = StubTwoProp(prop1='value1', prop2='value2')
+        self.assertEqual(value1_object.prop1, 'value1')
+        self.assertEqual(value1_object.prop2, 'value2')
+
+    def test_convert_to_string(self):
+        value_object = StubOneProp(prop='value')
+        self.assertEqual(value_object.prop, str(value_object))
+
+        value1_object = StubTwoProp(prop1='value1', prop2='value2')
+        self.assertEqual('{"prop1": "value1", "prop2": "value2"}', str(value1_object))
+
+    def test_is_immutable(self):
+        with self.assertRaises(FrozenInstanceError):
+            value_object = StubOneProp(prop='value')
+            value_object.prop = 'fake'
 
 class TestUniqueEntityIdUnit(unittest.TestCase):
 
@@ -15,10 +56,6 @@ class TestUniqueEntityIdUnit(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             value_object = UniqueEntityId()
             value_object.id = 'fake id'
-
-    def test_convert_to_string(self):
-        value_object = UniqueEntityId()
-        self.assertEqual(value_object.id, str(value_object))
 
     def test_throw_exception_when_uuid_is_invalid(self):
         with patch.object(
