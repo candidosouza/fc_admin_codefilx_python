@@ -5,3 +5,10 @@
 Microsserviço: Administração do Catálogo de vídeos com Python ( Back-end )
 
 Com DDD e Clean Arch
+
+
+## Testes
+
+```
+python -m unittest category.tests.domain.test_entities
+```
