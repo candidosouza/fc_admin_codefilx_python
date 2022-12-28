@@ -10,5 +10,5 @@ Com DDD e Clean Arch
 ## Testes
 
 ```
-python -m unittest category.tests.domain.test_entities
+python -m unittest category.tests.unit.domain.test_unit_entities
 ```
