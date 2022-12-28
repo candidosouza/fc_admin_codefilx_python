@@ -13,7 +13,7 @@ class TestCategoryUnit(unittest.TestCase):
     def test_is_immutable(self):
         with self.assertRaises(FrozenInstanceError):
             category = Category(name='Movie')
-            category.nome = 'Fake'
+            category.name = 'Fake'
 
     def test_constructor(self):
         category = Category(name='Movie')
