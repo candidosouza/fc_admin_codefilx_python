@@ -1,0 +1,39 @@
+[[package]]
+name = "autopep8"
+version = "2.0.1"
+requires_python = ">=3.6"
+summary = "A tool that automatically formats Python code to conform to the PEP 8 style guide"
+dependencies = [
+    "pycodestyle>=2.10.0",
+    "tomli; python_version < \"3.11\"",
+]
+
+[[package]]
+name = "pycodestyle"
+version = "2.10.0"
+requires_python = ">=3.6"
+summary = "Python style guide checker"
+
+[[package]]
+name = "tomli"
+version = "2.0.1"
+requires_python = ">=3.7"
+summary = "A lil' TOML parser"
+
+[metadata]
+lock_version = "4.1"
+content_hash = "sha256:f126b2cc741dd73f5243525d77fa7e079186ca7c611f25561ba1a3c92f371af4"
+
+[metadata.files]
+"autopep8 2.0.1" = [
+    {url = "https://files.pythonhosted.org/packages/82/f8/9cc97232fb1612327525903296f5e4d8ba1c4acc3469c18afdeba839ce62/autopep8-2.0.1-py2.py3-none-any.whl", hash = "sha256:be5bc98c33515b67475420b7b1feafc8d32c1a69862498eda4983b45bffd2687"},
+    {url = "https://files.pythonhosted.org/packages/b5/13/d3b4adad46dd3ce96e293345e1efe660d405f3ee3f4289304dca8a4e5544/autopep8-2.0.1.tar.gz", hash = "sha256:d27a8929d8dcd21c0f4b3859d2d07c6c25273727b98afc984c039df0f0d86566"},
+]
+"pycodestyle 2.10.0" = [
+    {url = "https://files.pythonhosted.org/packages/06/6b/5ca0d12ef7dcf7d20dfa35287d02297f3e0f9e515da5183654c03a9636ce/pycodestyle-2.10.0.tar.gz", hash = "sha256:347187bdb476329d98f695c213d7295a846d1152ff4fe9bacb8a9590b8ee7053"},
+    {url = "https://files.pythonhosted.org/packages/a2/54/001fdc0d69e8d0bb86c3423a6fa6dfada8cc26317c2635ab543e9ac411bd/pycodestyle-2.10.0-py2.py3-none-any.whl", hash = "sha256:8a4eaf0d0495c7395bdab3589ac2db602797d76207242c17d470186815706610"},
+]
+"tomli 2.0.1" = [
+    {url = "https://files.pythonhosted.org/packages/97/75/10a9ebee3fd790d20926a90a2547f0bf78f371b2f13aa822c759680ca7b9/tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
+    {url = "https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
