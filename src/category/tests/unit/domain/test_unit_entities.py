@@ -5,6 +5,7 @@ from datetime import datetime
 from dataclasses import FrozenInstanceError, is_dataclass
 from category.domain.entities import Category
 
+
 class TestCategoryUnit(unittest.TestCase):
 
     def test_if_is_a_dataclass(self):
@@ -24,10 +25,10 @@ class TestCategoryUnit(unittest.TestCase):
 
         created_at = datetime.now()
         category = Category(
-            name        = 'Movie',
-            description = 'some description',
-            is_active   = False,
-            created_at  = created_at
+            name='Movie',
+            description='some description',
+            is_active=False,
+            created_at=created_at
         )
 
         self.assertEqual(category.name, 'Movie')

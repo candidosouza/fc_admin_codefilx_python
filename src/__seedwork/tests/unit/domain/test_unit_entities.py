@@ -10,6 +10,7 @@ class StubEntity(Entity):
     prop1: str
     prop2: str
 
+
 class TestEntityUnit(unittest.TestCase):
     def test_if_is_a_abstract_class(self):
         self.assertIsInstance(Entity(), ABC)
@@ -36,18 +37,20 @@ class TestEntityUnit(unittest.TestCase):
 
     def test_accept_a_valid_uuid(self):
         entity = StubEntity(
-                unique_entity_id=UniqueEntityId('c4b4b8d4-9a1e-4c4b-8c8e-2d2a2a2c2d2e'),
-                prop1='value1', 
-                prop2='value2'
-            )
+            unique_entity_id=UniqueEntityId(
+                'c4b4b8d4-9a1e-4c4b-8c8e-2d2a2a2c2d2e'),
+            prop1='value1',
+            prop2='value2'
+        )
         self.assertEqual(entity.id, 'c4b4b8d4-9a1e-4c4b-8c8e-2d2a2a2c2d2e')
 
     def test_to_dict_method(self):
         entity = StubEntity(
-                unique_entity_id=UniqueEntityId('c4b4b8d4-9a1e-4c4b-8c8e-2d2a2a2c2d2e'),
-                prop1='value1', 
-                prop2='value2'
-            )
+            unique_entity_id=UniqueEntityId(
+                'c4b4b8d4-9a1e-4c4b-8c8e-2d2a2a2c2d2e'),
+            prop1='value1',
+            prop2='value2'
+        )
         self.assertDictEqual(entity.to_dict(), {
             'id': 'c4b4b8d4-9a1e-4c4b-8c8e-2d2a2a2c2d2e',
             'prop1': 'value1',
