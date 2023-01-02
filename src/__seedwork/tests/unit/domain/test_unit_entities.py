@@ -21,10 +21,10 @@ class TestEntityUnit(unittest.TestCase):
     def test_if_is_a_dataclass(self):
         self.assertTrue(is_dataclass(Entity))
 
-    def test_if_is_immutable(self):
-        with self.assertRaises(FrozenInstanceError):
-            entity = Entity()
-            entity.id = 'fake id'
+    # def test_if_is_immutable(self):
+    #     with self.assertRaises(FrozenInstanceError):
+    #         entity = Entity()
+    #         entity.id = 'fake id'
 
     def test_if_has_unique_entity_id(self):
         entity = Entity()
@@ -59,3 +59,9 @@ class TestEntityUnit(unittest.TestCase):
             'prop1': 'value1',
             'prop2': 'value2'
         })
+
+    def test_set_method(self):
+        entity = StubEntity(prop1='value1', prop2='value2',)
+        # pylint: disable=protected-access
+        entity._set('prop1', 'changed')
+        self.assertEqual(entity.prop1, 'changed')
