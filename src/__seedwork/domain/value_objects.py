@@ -6,7 +6,7 @@ from dataclasses import dataclass, field, fields
 from __seedwork.domain.exceptions import InvalidUuidException
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class ValueObject(ABC):
 
     def __str__(self):
