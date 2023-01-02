@@ -7,9 +7,11 @@ from __seedwork.domain.value_objects import UniqueEntityId
 @dataclass(frozen=True)
 class Entity(ABC):
 
+    # pylint: disable=unnecessary-lambda
     unique_entity_id: UniqueEntityId = field(
         default_factory=lambda: UniqueEntityId())
 
+    # pylint: invalid-name
     @property
     def id(self):
         return str(self.unique_entity_id)

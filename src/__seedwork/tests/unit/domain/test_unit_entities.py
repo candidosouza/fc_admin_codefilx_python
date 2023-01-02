@@ -1,6 +1,9 @@
+# pylint: disable=unexpected-keyword-arg
+
 import unittest
 from abc import ABC
 from dataclasses import dataclass, is_dataclass, FrozenInstanceError
+
 from __seedwork.domain.entities import Entity
 from __seedwork.domain.value_objects import UniqueEntityId
 

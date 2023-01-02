@@ -1,7 +1,8 @@
-import uuid
 import json
+import uuid
 from abc import ABC
 from dataclasses import dataclass, field, fields
+
 from __seedwork.domain.exceptions import InvalidUuidException
 
 

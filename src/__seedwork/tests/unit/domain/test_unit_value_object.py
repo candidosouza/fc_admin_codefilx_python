@@ -1,5 +1,6 @@
+# pylint: disable=protected-access
+
 from abc import ABC
-from string import octdigits
 import unittest
 import uuid
 from dataclasses import FrozenInstanceError, dataclass, is_dataclass

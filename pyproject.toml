@@ -1,4 +1,9 @@
 [tool.pdm]
+[tool.pdm.dev-dependencies]
+dev = [
+    "autopep8>=2.0.1",
+    "pylint>=2.15.9",
+]
 
 [project]
 name = ""
@@ -8,7 +13,6 @@ authors = [
     {name = "candidosouza", email = "candidosouzza@gmail.com"},
 ]
 dependencies = [
-    "autopep8>=2.0.1",
 ]
 requires-python = ">=3.10.2"
 license = {text = "n"}

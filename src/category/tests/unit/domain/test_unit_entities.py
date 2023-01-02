@@ -1,8 +1,9 @@
-import unittest
+# pylint: disable=unexpected-keyword-arg
 
 import unittest
-from datetime import datetime
 from dataclasses import FrozenInstanceError, is_dataclass
+from datetime import datetime
+
 from category.domain.entities import Category
 
 
