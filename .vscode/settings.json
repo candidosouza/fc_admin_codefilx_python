@@ -37,6 +37,7 @@
         "src",
         "--ignore",
         "__pypackages__",
+        "-s"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
