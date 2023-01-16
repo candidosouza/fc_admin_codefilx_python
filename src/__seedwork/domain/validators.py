@@ -48,8 +48,8 @@ PropsValidated = TypeVar('PropsValidated')
 
 @dataclass(slots=True)
 class ValidatorFieldsInterface(ABC, Generic[PropsValidated]):
-    errors: ErrorFields
-    validated_data: PropsValidated
+    errors: ErrorFields = None
+    validated_data: PropsValidated = None
 
     @abc.abstractmethod
     def validate(self, data: Any) -> bool:
