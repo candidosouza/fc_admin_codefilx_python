@@ -3,6 +3,8 @@ from typing import Any, Dict, Generic, List, TypeVar
 from abc import ABC
 import abc
 
+from rest_framework.serializers import Serializer
+
 from __seedwork.domain.exceptions import ValidationException
 
 
@@ -46,6 +48,7 @@ class ValidatorRules:
 ErrorFields = Dict[str, List[str]]
 PropsValidated = TypeVar('PropsValidated')
 
+
 @dataclass(slots=True)
 class ValidatorFieldsInterface(ABC, Generic[PropsValidated]):
     errors: ErrorFields = None
@@ -54,3 +57,18 @@ class ValidatorFieldsInterface(ABC, Generic[PropsValidated]):
     @abc.abstractmethod
     def validate(self, data: Any) -> bool:
         raise NotImplementedError()
+
+
+class DRFValidator(ValidatorFieldsInterface[PropsValidated]):
+
+    def validate(self, data: Serializer):
+        serializer = data
+        is_valid = serializer.is_valid()
+        if not is_valid:
+            self.errors = {
+                field: [str(_error) for _error in _errors]
+                for field, _errors in serializer.erros.items()
+            }
+            return False
+        self.validated_data = serializer.validated_data
+        return True
