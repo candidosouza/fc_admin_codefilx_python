@@ -61,14 +61,13 @@ class ValidatorFieldsInterface(ABC, Generic[PropsValidated]):
 
 class DRFValidator(ValidatorFieldsInterface[PropsValidated], ABC):
 
-    def validate(self, data: Serializer):
+    def validate(self, data: Serializer) -> bool:
         serializer = data
         if serializer.is_valid():
-            self.validated_data = serializer.validated_data
+            self.validated_data = dict(serializer.validated_data)
             return True
         self.errors = {
             field: [str(_error) for _error in _errors]
-            for field, _errors in serializer.erros.items()
+            for field, _errors in serializer.errors.items()
         }
         return False
-
