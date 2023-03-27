@@ -4,9 +4,13 @@ from abc import ABC
 import abc
 
 from rest_framework.serializers import Serializer
+from django.conf import settings
 
 from __seedwork.domain.exceptions import ValidationException
 
+
+if not settings.configured:
+    settings.configure(USE_I18N=False)
 
 @dataclass(frozen=True, slots=True)
 class ValidatorRules:
