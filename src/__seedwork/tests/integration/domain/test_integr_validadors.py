@@ -1,9 +1,7 @@
 import unittest
-
-from __seedwork.domain.validators import (
-    ValidatorRules, ValidationException, ValidatorFieldsInterface, DRFValidator
-)
 from rest_framework import serializers
+
+from __seedwork.domain.validators import DRFValidator
 
 
 # pylint: disable=abstract-method
