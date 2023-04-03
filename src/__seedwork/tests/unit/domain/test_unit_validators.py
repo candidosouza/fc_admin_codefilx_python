@@ -2,9 +2,11 @@ import unittest
 from unittest.mock import MagicMock, PropertyMock, patch
 from dataclasses import fields
 from rest_framework.serializers import Serializer
+from rest_framework import serializers
 
 from __seedwork.domain.validators import (
-    ValidatorRules, ValidationException, ValidatorFieldsInterface, DRFValidator
+    ValidatorRules, ValidationException, ValidatorFieldsInterface, DRFValidator,
+    StrictBooleanField, StrictCharField
 )
 
 
@@ -293,3 +295,74 @@ class TestDRFValidatorsUnit(unittest.TestCase):
         self.assertEqual(validator.errors, {'field': ['some error']})
         mock_errors.assert_called()
         mock_is_valid.assert_called()
+
+
+class TestStrictCharFieldUnit(unittest.TestCase):
+    def test_if_is_valid_when_not_str_values(self):
+        class StubStrictCharFieldSerializer(serializers.Serializer):
+            name = StrictCharField()
+
+        serializer = StubStrictCharFieldSerializer(data={'name': 7})
+        serializer.is_valid()
+        self.assertEqual(serializer.errors, {
+            'name': [serializers.ErrorDetail(string='Not a valid string.', code='invalid')]
+        })
+
+    def test_none_value_is_valid(self):
+        class StubStrictCharFieldSerializer(serializers.Serializer):
+            name = StrictCharField(required=True, allow_null=True)
+
+        serializer = StubStrictCharFieldSerializer(data={'name': None})
+        self.assertTrue(serializer.is_valid())
+
+    def test_is_valid(self):
+        class StubStrictCharFieldSerializer(serializers.Serializer):
+            name = StrictCharField(required=True, allow_null=True)
+
+        serializer = StubStrictCharFieldSerializer(data={'name': 'some value'})
+        serializer.is_valid()
+        self.assertEqual(serializer.validated_data, {'name': 'some value'})
+
+
+class TestStrictBolleanFieldUnit(unittest.TestCase):
+    def test_if_is_valid_when_not_str_values(self):
+        class StubStrictBolleanFieldSerializer(serializers.Serializer):
+            active = StrictBooleanField()
+
+        message_error = 'Must be a valid boolean.'
+
+        serializer = StubStrictBolleanFieldSerializer(data={'active': 0})
+        serializer.is_valid()
+        self.assertEqual(serializer.errors, {
+            'active': [serializers.ErrorDetail(string=message_error, code='invalid')]
+        })
+
+        serializer = StubStrictBolleanFieldSerializer(data={'active': 1})
+        serializer.is_valid()
+        self.assertEqual(serializer.errors, {
+            'active': [serializers.ErrorDetail(string=message_error, code='invalid')]
+        })
+
+        serializer = StubStrictBolleanFieldSerializer(data={'active': 'True'})
+        serializer.is_valid()
+        self.assertEqual(serializer.errors, {
+            'active': [serializers.ErrorDetail(string=message_error, code='invalid')]
+        })
+
+        serializer = StubStrictBolleanFieldSerializer(data={'active': 'False'})
+        serializer.is_valid()
+        self.assertEqual(serializer.errors, {
+            'active': [serializers.ErrorDetail(string=message_error, code='invalid')]
+        })
+
+    def test_is_valid(self):
+        class StubStrictBolleanFieldSerializer(serializers.Serializer):
+            active = StrictBooleanField()
+
+        serializer = StubStrictBolleanFieldSerializer(data={'active': True})
+        serializer.is_valid()
+        self.assertEqual(serializer.validated_data, {'active': True})
+
+        serializer = StubStrictBolleanFieldSerializer(data={'active': False})
+        serializer.is_valid()
+        self.assertEqual(serializer.validated_data, {'active': False})
