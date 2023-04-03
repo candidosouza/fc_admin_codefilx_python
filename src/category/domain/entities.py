@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 from __seedwork.domain.entities import Entity
-from __seedwork.domain.validators import CategoryValidatorFactory
+from category.domain.validators import CategoryValidatorFactory
 
 
 # pylint: disable=unnecessary-lambda
