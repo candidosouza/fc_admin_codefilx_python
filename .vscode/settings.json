@@ -41,6 +41,9 @@
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
+    "cSpell.words": [
+        "candidosouza"
+    ],
     // configurações unittest
     // "python.testing.unittestArgs": [
     //     "-v",
