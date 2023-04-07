@@ -17,6 +17,8 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 
 * DDD
 * Code Review
+* PR Request Template
+* Conventional Commits
 
 
 > ## Bibliotecas e Ferramentas
