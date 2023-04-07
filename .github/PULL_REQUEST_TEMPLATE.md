@@ -8,8 +8,6 @@ Fixes # (issue)
 
 > ## Tipo de mudança
 
-Exclua as opções que não são relevantes.
-
 - [ ] Correção de bug (alteração ininterrupta que corrige um problema)
 - [ ] Novo recurso (alteração ininterrupta que adiciona funcionalidade)
 - [ ] Alteração de última hora (correção ou recurso que faria com que a funcionalidade existente não funcionasse conforme o esperado)
@@ -21,12 +19,6 @@ Descreva os testes que você executou para verificar suas alterações. Forneça
 
 - [ ] Test A
 - [ ] Test B
-
-**Test Configuration**:
-* Firmware version:
-* Hardware:
-* Toolchain:
-* SDK:
 
 > ## Checklist:
 
