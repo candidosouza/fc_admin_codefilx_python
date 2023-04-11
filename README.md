@@ -1,5 +1,6 @@
 # Admin Codeflix
 
+
 > ## Repositório do curso Full Cycle 3.0
 
 Microsserviço: Administração do Catálogo de vídeos com Python ( Back-end )
@@ -17,6 +18,9 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 
 * DDD
 * Code Review
+* PR Request Template
+* Conventional Commits
+* CI
 
 
 > ## Bibliotecas e Ferramentas
@@ -27,4 +31,5 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 * Django
 * DRF (Django Rest Framework)
 * Git
+* Github Actions
 * Docker
