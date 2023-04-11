@@ -4,13 +4,15 @@ on:
     branches:
       - develop
 
-strategy:
-  matrix:
-    python-version: [3.10]
-    os: [ubuntu-latest]
 jobs:
   check-application:
     runs-on: ubuntu-latest
+    
+    strategy:
+    matrix:
+      python-version: [3.10]
+      os: [ubuntu-latest]
+
     steps:
       - uses: actions/checkout@v3
           
