@@ -27,11 +27,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pdm install
+          pdm sync -d -G testing
 
       - name: Run Tests
-        run: |
-          python pytest --ignore __pypackages__
+        run: docker-compose exec -T app pytest --ignore __pypackages__
+      # python pytest --ignore __pypackages__
+
+        # tox -e py
 
       # - name: Run sonarqube
       #   uses: sonarsource/sonarqube-scan-action@master
