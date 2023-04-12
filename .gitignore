@@ -3,6 +3,9 @@
 .docker/zsh/history/.zsh_history
 __pypackages__
 .pytest_cache
+.scannerwork
+.tox
 .coverage
+coverage.xml
 __coverage
 tmp/
