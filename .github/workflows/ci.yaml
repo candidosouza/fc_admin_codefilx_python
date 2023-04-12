@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/fc_admin_codeflix_python
+          repository: candidosouza/fc_admin_codeflix_python
           tags: ${{ github.sha }}, latest
 
       # - name: Commit
