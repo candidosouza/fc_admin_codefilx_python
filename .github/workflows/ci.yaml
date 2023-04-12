@@ -37,18 +37,18 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          repository: ${{ secrets.DOCKER_USERNAME }}/fc_admin_codeflix_python
+          # repository: ${{ secrets.DOCKER_USERNAME }}/fc_admin_codeflix_python
           tags: ${{ github.sha }}, latest
 
-      - name: Commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -am "Bump docker version"
+      # - name: Commit
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git commit -am "Bump docker version"
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.DOCKERHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          repository: candidosouza/fc_admin_codeflix_python
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.DOCKERHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
+      #     repository: candidosouza/fc_admin_codeflix_python
