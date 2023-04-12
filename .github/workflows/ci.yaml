@@ -44,8 +44,5 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-      #     repository: candidosouza/fc_admin_codeflix_python
-          tags: candidosouza/fc_admin_codeflix_python:latest
-      #     secrets: |
-      #       GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fc_admin_codeflix_python:latest
 
