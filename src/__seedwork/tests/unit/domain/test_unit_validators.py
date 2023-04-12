@@ -235,7 +235,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
         ValidatorRules.values(True, 'prop').required().boolean()
         ValidatorRules.values(False, 'prop').required().boolean()
         # pylint: disable=redundant-unittest-assert
-        self.assertTrue(True)
+        # self.assertTrue(True)
 
 
 class TestValidatorFieldsInsterfaceUnit(unittest.TestCase):

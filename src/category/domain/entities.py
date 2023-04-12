@@ -32,13 +32,6 @@ class Category(Entity):
     def deactivate(self):
         self._set('is_active', False)
 
-    # @classmethod
-    # def validate(cls, name: str, description: str, is_active: bool = None):
-    #     ValidatorRules.values(name, 'name').required().string().min_length(3).max_length(255)
-    #     ValidatorRules.values(description, 'description').string()
-    #     ValidatorRules.values(is_active, 'is_active').boolean()
-
-
     def validate(self):
         validator = CategoryValidatorFactory.create()
         is_valid = validator.validate(self.to_dict())
