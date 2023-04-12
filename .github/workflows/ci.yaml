@@ -39,6 +39,8 @@ jobs:
           push: true
           repository: candidosouza/fc_admin_codeflix_python
           tags: ${{ github.sha }}, latest
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
       # - name: Commit
       #   run: |
