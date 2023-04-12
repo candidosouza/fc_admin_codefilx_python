@@ -30,7 +30,7 @@ jobs:
           pdm sync -d -G testing
 
       - name: Run Tests
-        run: docker-compose exec -T app pytest --ignore __pypackages__
+        run: docker-compose exec -T app tox -e py
       # python pytest --ignore __pypackages__
 
         # tox -e py
