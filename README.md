@@ -33,3 +33,4 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 * Git
 * Github Actions
 * Docker
+* SonarCloud
