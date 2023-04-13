@@ -20,10 +20,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Run Tests Py ${{ matrix.python-version }}
-        uses: collective/tox-action@main
-        with:
-          python-version: ${{ matrix.python-version }}
+      # - name: Run Tests Py ${{ matrix.python-version }}
+      #   uses: collective/tox-action@main
+      #   with:
+      #     python-version: ${{ matrix.python-version }}
 
       # - name: Run Tests
       #   run: docker-compose exec -T app tox -e py
@@ -52,8 +52,8 @@ jobs:
 
       - name: Install tox and any other packages
         run: pip install tox
-        
-      - name: Run tox
+
+      - name: Run tox with tests
         run: tox -e py
 
       - name: SonarCloud Scan
