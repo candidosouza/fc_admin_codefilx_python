@@ -1,4 +1,5 @@
 metricbeat.modules:
+#https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-module-docker.html
 - module: docker
   metricsets:
     - "container"
@@ -7,26 +8,26 @@ metricbeat.modules:
     - "event"
     - "healthcheck"
     - "info"
-    #- "image"
+    - "image"
     - "memory"
     - "network"
-    #- "network_summary"
+    - "network_summary"
   hosts: ["unix:///var/run/docker.sock"]
   period: 10s
   enabled: true
 
+#https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-module-elasticsearch.html
 - module: elasticsearch
   metricsets:
     - node
     - node_stats
     - cluster_stats
     - index
-    #- index
-    #- index_recovery
-    #- index_summary
-    #- ingest_pipeline
-    #- shard
-    #- ml_job
+    - index_recovery
+    - index_summary
+    - ingest_pipeline
+    - shard
+    - ml_job
   period: 10s
   hosts: ["http://localhost:9200"]
 
