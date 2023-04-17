@@ -49,4 +49,3 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fc_admin_codeflix_python:latest
-
