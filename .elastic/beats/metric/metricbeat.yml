@@ -9,9 +9,9 @@ metricbeat.modules:
     - "healthcheck"
     - "info"
     - "image"
-    - "memory"
+    # - "memory"
     - "network"
-    - "network_summary"
+    # - "network_summary"
   hosts: ["unix:///var/run/docker.sock"]
   period: 10s
   enabled: true
@@ -23,11 +23,11 @@ metricbeat.modules:
     - node_stats
     - cluster_stats
     - index
-    - index_recovery
-    - index_summary
-    - ingest_pipeline
-    - shard
-    - ml_job
+    # - index_recovery
+    # - index_summary
+    # - ingest_pipeline
+    # - shard
+    # - ml_job
   period: 10s
   hosts: ["http://localhost:9200"]
 
