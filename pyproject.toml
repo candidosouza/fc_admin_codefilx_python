@@ -17,6 +17,7 @@ dependencies = [
     "djangorestframework>=3.14.0",
     "tox>=4.4.11",
     "coverage>=7.2.3",
+    "elastic-apm>=6.15.1",
 ]
 requires-python = ">=3.10.2"
 license = {text = "n"}
