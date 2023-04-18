@@ -2,6 +2,7 @@
 *.pyc
 .docker/zsh/history/.zsh_history
 __pypackages__
+__pycache__
 .pytest_cache
 .scannerwork
 .tox
@@ -9,3 +10,4 @@ __pypackages__
 coverage.xml
 __coverage
 tmp/
+elasticsearch_data/
