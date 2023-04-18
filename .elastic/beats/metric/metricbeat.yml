@@ -1,0 +1,40 @@
+metricbeat.modules:
+#https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-module-docker.html
+- module: docker
+  metricsets:
+    - "container"
+    - "cpu"
+    - "diskio"
+    - "event"
+    - "healthcheck"
+    - "info"
+    - "image"
+    # - "memory"
+    - "network"
+    # - "network_summary"
+  hosts: ["unix:///var/run/docker.sock"]
+  period: 10s
+  enabled: true
+
+#https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-module-elasticsearch.html
+- module: elasticsearch
+  metricsets:
+    - node
+    - node_stats
+    - cluster_stats
+    - index
+    # - index_recovery
+    # - index_summary
+    # - ingest_pipeline
+    # - shard
+    # - ml_job
+  period: 10s
+  hosts: ["http://localhost:9200"]
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+
+setup.kibana:
+  host: "kibana:5601"
+
+setup.dashboards.enabled: true
