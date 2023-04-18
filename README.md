@@ -21,6 +21,7 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 * PR Request Template
 * Conventional Commits
 * CI
+* Observabilidade
 
 
 > ## Bibliotecas e Ferramentas
@@ -34,3 +35,6 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 * Github Actions
 * Docker
 * SonarCloud
+* ELK Stack
+* Prometheus
+* Gafana
