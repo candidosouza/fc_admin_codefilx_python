@@ -1,4 +1,6 @@
 .history/
+.devcontainer/
+.vscode/
 *.pyc
 .docker/zsh/history/.zsh_history
 __pypackages__
@@ -11,3 +13,5 @@ coverage.xml
 __coverage
 tmp/
 elasticsearch_data/
+# .docker/.grafana/config/
+.docker/.grafana/grafana_data/
