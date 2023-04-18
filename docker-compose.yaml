@@ -84,6 +84,7 @@ services:
       command:
         - --config.file=/etc/prometheus/prometheus.yml
       volumes:
+        # - ./.docker/.prometheus/prometheus_data:/prometheus
         - ./.docker/.prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
 
     grafana:
