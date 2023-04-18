@@ -36,3 +36,5 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 * Docker
 * SonarCloud
 * ELK Stack
+* Prometheus
+* Gafana
