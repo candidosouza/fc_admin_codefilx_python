@@ -37,7 +37,7 @@ python -m unittest core.category.tests.unit.domain.test_unit_entities
 * SonarCloud
 * ELK Stack
 * Prometheus
-* Gafana
+* Grafana
 * cAdvisor 
 
 
