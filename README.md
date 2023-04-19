@@ -11,7 +11,7 @@ Com DDD e Clean Arch
 > ## Testes
 
 ```
-python -m unittest category.tests.unit.domain.test_unit_entities
+python -m unittest core.category.tests.unit.domain.test_unit_entities
 ```
 
 > ## Metodologias e Designs
@@ -38,7 +38,8 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 * ELK Stack
 * Prometheus
 * Gafana
+* cAdvisor 
 
 
 
-obs: extra.host
+obs: documentar extra.host
