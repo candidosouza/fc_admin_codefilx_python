@@ -38,3 +38,7 @@ python -m unittest category.tests.unit.domain.test_unit_entities
 * ELK Stack
 * Prometheus
 * Gafana
+
+
+
+obs: extra.host
