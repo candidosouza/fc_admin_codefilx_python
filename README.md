@@ -47,16 +47,6 @@ obs: documentar extra.host
 
 > ## Instação
 
-Criar a pasta do volume do elasticsearch
-```
-mkdir elasticsearch_data
-```
-
-Criar network externa
-```
-docker network create observability
-```
-
 Rodar o docker-compose
 ``` 
 docker-compose up -d
