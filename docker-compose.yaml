@@ -3,10 +3,14 @@ version: '3'
 services:
     app:
       build: .
-      container_name: micro-videos-python-app
+      container_name: app
+      entrypoint: ./.docker/entrypoint.sh
       # command: ./.docker/entrypoint.sh
+      tty: true
       volumes:
         - .:/home/python/app
+      ports:
+        - 8000:8000
 
     elasticsearch:
       image: docker.elastic.co/elasticsearch/elasticsearch:7.13.0
@@ -27,8 +31,6 @@ services:
         - ./.docker/.elastic/elasticsearch_data:/usr/share/elasticsearch/data
       ports:
         - 9200:9200
-      networks: 
-          - observability
     
     kibana:
       image: docker.elastic.co/kibana/kibana:7.13.0
@@ -38,8 +40,6 @@ services:
       environment:
         ELASTICSEARCH_URL: http://elasticsearch:9200
         ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
-      networks: 
-          - observability
 
     metricbeat:
       image: docker.elastic.co/beats/metricbeat:7.13.0
@@ -50,8 +50,6 @@ services:
         - ./.docker/.elastic/beats/metric/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
       restart: on-failure
       command: metricbeat -e -strict.perms=false
-      networks: 
-        - observability
 
     heartbeat:
       image: docker.elastic.co/beats/heartbeat:7.13.0
@@ -60,8 +58,6 @@ services:
         - ./.docker/.elastic/beats/heartbeat/heartbeat.yml:/usr/share/heartbeat/heartbeat.yml
       environment: 
         - setup.kibana.host=kibana:5601
-      networks: 
-        - observability
 
     apm:
       image: docker.elastic.co/apm/apm-server-oss:7.13.0
@@ -71,8 +67,6 @@ services:
       ports:
         - "8200:8200"
       restart: on-failure
-      networks: 
-        - observability
 
     prometheus:
       image: prom/prometheus
@@ -84,7 +78,7 @@ services:
       command:
         - --config.file=/etc/prometheus/prometheus.yml
       volumes:
-        # - ./.docker/.prometheus/prometheus_data:/prometheus
+        - ./.docker/.prometheus/prometheus_data:/etc/prometheus
         - ./.docker/.prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
 
     grafana:
@@ -92,15 +86,12 @@ services:
       ports:
         - "3000:3000"
       container_name: grafana
+      restart: always
       depends_on:
         - prometheus
       volumes:
-        # - ./.docker/.grafana/entrypoint.sh:/app/entrypoint.sh
-        # - ./.docker/.grafana/config/grafana.ini:/etc/grafana/grafana.ini
-        # - ./.docker/.grafana/config/dashboards:/var/lib/grafana/dashboards
-        # - ./.docker/.grafana/config/datasources:/etc/grafana/datasources
-        - ./.docker/.grafana/config/plugins:/var/lib/grafana/plugins
-        # - ./.docker/.grafana/grafana_data:/var/lib/grafana
+        - ./.docker/.grafana/grafana_data:/var/lib/grafana
+      user: "$UID:$GID"
 
     cadvisor:
       image: gcr.io/cadvisor/cadvisor:latest
@@ -113,7 +104,3 @@ services:
         - /var/run:/var/run:rw
         - /sys:/sys:ro
         - /var/run/docker.sock:/var/run/docker.sock
-
-networks:
-  observability:
-    external: true
