@@ -43,3 +43,11 @@ python -m unittest core.category.tests.unit.domain.test_unit_entities
 
 
 obs: documentar extra.host
+=======
+
+> ## Instação
+
+Rodar o docker-compose
+``` 
+docker-compose up -d
+```
