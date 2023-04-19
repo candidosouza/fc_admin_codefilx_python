@@ -3,7 +3,8 @@ FROM python:3.10.2
 RUN apt update && apt install -y --no-install-recommends git curl wget \
     && python -m pip install --upgrade pip
 
-RUN useradd -ms /bin/bash python
+RUN useradd -ms /bin/bash python && \
+    chown -R python:python /var/log
 
 RUN pip install pdm
 
