@@ -3,6 +3,7 @@
 .vscode/
 *.pyc
 .docker/zsh/history/.zsh_history
+elasticsearch_data/
 __pypackages__
 __pycache__
 .pytest_cache
