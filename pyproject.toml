@@ -20,6 +20,10 @@ dependencies = [
     "coverage>=7.2.3",
     "elastic-apm>=6.15.1",
     "django-prometheus>=2.2.0",
+    "opentelemetry-sdk>=1.17.0",
+    "opentelemetry-instrumentation-django>=0.38b0",
+    "requests>=2.28.2",
+    "opentelemetry-exporter-prometheus>=1.12.0rc1",
 ]
 requires-python = ">=3.10.2"
 license = {text = "n"}

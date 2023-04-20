@@ -38,7 +38,7 @@ python -m unittest core.category.tests.unit.domain.test_unit_entities
 * ELK Stack
 * Prometheus
 * Grafana
-* cAdvisor 
+* OpenTelemetry
 
 
 

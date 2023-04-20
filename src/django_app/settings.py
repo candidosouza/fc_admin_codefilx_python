@@ -196,3 +196,34 @@ LOGGING = {
         },
     },
 }
+
+# opentelemetry
+DJANGO_SETTINGS_MODULE = 'django_app.settings'
+OPENTELEMETRY_DJANGO_INSTRUMENT = True
+# OPENTELEMETRY_DJANGO_TRACER_PROVIDER = 'opentelemetry.sdk.trace.TracerProvider'
+# OPENTELEMETRY_DJANGO_SPAN_PROCESSORS = [
+#     'opentelemetry.sdk.trace.export.SimpleSpanProcessor',
+#     'opentelemetry.sdk.trace.export.BatchSpanProcessor',
+# ]
+# OPENTELEMETRY_DJANGO_EXPORTER = 'opentelemetry.sdk.trace.export.ConsoleSpanExporter'
+# OPENTELEMETRY_DJANGO_EXPORTER_ARGS = {
+#     'out': sys.stdout,
+# }
+# OPENTELEMETRY_DJANGO_PROPAGATORS = [
+#     'opentelemetry.trace.propagation.tracecontext_http_header_format.TraceContextPropagator',
+#     'opentelemetry.trace.propagation.b3_format.B3FormatPropagator',
+#     'opentelemetry.trace.propagation.skeleton_format.SkeletonFormatPropagator',
+# ]
+# OPENTELEMETRY_DJANGO_TRACER_PROVIDER_ARGS = {
+#     'active_span_processor': 'opentelemetry.sdk.trace.export.SimpleSpanProcessor',
+#     'active_exporter': 'opentelemetry.sdk.trace.export.ConsoleSpanExporter',
+#     'active_exporter_args': {
+#         'out': sys.stdout,
+#     },
+#     'active_propagators': [
+#         'opentelemetry.trace.propagation.tracecontext_http_header_format.TraceContextPropagator',
+#         'opentelemetry.trace.propagation.b3_format.B3FormatPropagator',
+#         'opentelemetry.trace.propagation.skeleton_format.SkeletonFormatPropagator',
+#     ],
+# }
+
