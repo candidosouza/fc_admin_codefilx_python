@@ -5,14 +5,7 @@
 
 Microsserviço: Administração do Catálogo de vídeos com Python ( Back-end )
 
-Com DDD e Clean Arch
-
-
-> ## Testes
-
-```
-python -m unittest core.category.tests.unit.domain.test_unit_entities
-```
+Com DDD e Clean Architecture
 
 > ## Metodologias e Designs
 
@@ -42,12 +35,20 @@ python -m unittest core.category.tests.unit.domain.test_unit_entities
 
 
 
-obs: documentar extra.host
-=======
+Documentação em andamento...
+
+
+(obs): documentar docker extra.host
 
 > ## Instação
 
 Rodar o docker-compose
 ``` 
 docker-compose up -d
+```
+
+> ## Testes
+
+```
+python -m unittest core.category.tests.unit.domain.test_unit_entities
 ```
