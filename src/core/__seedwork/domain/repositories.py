@@ -33,6 +33,16 @@ class RepositoryInterface(Generic[ET], ABC):
         raise NotImplementedError
 
 
+Input = TypeVar('Input')
+Output = TypeVar('Output')
+
+@dataclass(slots=True)
+class SearchableRepositoryInterface(Generic[ET, Input, Output], RepositoryInterface[ET], ABC):
+    @abstractmethod
+    def search(self, input_params: Input) -> Output:
+        raise NotImplementedError
+
+
 # repository in memory
 @dataclass(slots=True)
 class InMemoryRepository(RepositoryInterface[ET], ABC):
