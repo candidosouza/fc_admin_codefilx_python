@@ -52,3 +52,7 @@ docker-compose up -d
 ```
 python -m unittest core.category.tests.unit.domain.test_unit_entities
 ```
+
+```
+python -m unittest core.__seedwork.tests.unit.domain.test_unit_repository
+```
