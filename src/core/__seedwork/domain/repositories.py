@@ -1,47 +1,53 @@
-from abc import ABC, abstractmethod
+from abc import ABC
+import abc
 from dataclasses import dataclass, field
+import math
 from typing import Any, Generic, List, Optional, TypeVar
-
 from core.__seedwork.domain.value_objects import UniqueEntityId
 from core.__seedwork.domain.entities import Entity
 from core.__seedwork.domain.exceptions import NotFoundException
 
 
-# ET = Entity Type
 ET = TypeVar('ET', bound=Entity)
 
 
 class RepositoryInterface(Generic[ET], ABC):
-    @abstractmethod
-    def insert(self, entity: ET) -> ET:
-        raise NotImplementedError
 
-    @abstractmethod
+    @abc.abstractmethod
+    def insert(self, entity: ET) -> None:
+        raise NotImplementedError()
+
+    def bulk_insert(self, entities: List[ET]) -> None:
+        raise NotImplementedError()
+
+    @abc.abstractmethod
     def find_by_id(self, entity_id: str | UniqueEntityId) -> ET:
-        raise NotImplementedError
+        raise NotImplementedError()
 
-    @abstractmethod
+    @abc.abstractmethod
     def find_all(self) -> List[ET]:
-        raise NotImplementedError
+        raise NotImplementedError()
 
-    @abstractmethod
+    @abc.abstractmethod
     def update(self, entity: ET) -> None:
-        raise NotImplementedError
+        raise NotImplementedError()
 
-    @abstractmethod
+    @abc.abstractmethod
     def delete(self, entity_id: str | UniqueEntityId) -> None:
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 Input = TypeVar('Input')
 Output = TypeVar('Output')
 
 
-@dataclass(slots=True)
 class SearchableRepositoryInterface(Generic[ET, Input, Output], RepositoryInterface[ET], ABC):
-    @abstractmethod
+
+    sortable_fields: List[str] = []
+
+    @abc.abstractmethod
     def search(self, input_params: Input) -> Output:
-        raise NotImplementedError
+        raise NotImplementedError()
 
 
 Filter = TypeVar('Filter', str, Any)
@@ -53,9 +59,9 @@ class SearchParams(Generic[Filter]):
     per_page: Optional[int] = 15
     sort: Optional[str] = None
     sort_dir: Optional[str] = None
-    filter: Optional[filter] = None
+    filter: Optional[Filter] = None
 
-    def __post_init__(self) -> None:
+    def __post_init__(self):
         self._normalize_page()
         self._normalize_per_page()
         self._normalize_sort()
@@ -65,17 +71,17 @@ class SearchParams(Generic[Filter]):
     def _normalize_page(self):
         page = self._convert_to_int(self.page)
         if page <= 0:
-            page = self._get_dataclass_fields('page').default
+            page = self._get_dataclass_field('page').default
         self.page = page
 
     def _normalize_per_page(self):
         per_page = self._convert_to_int(self.per_page)
         if per_page < 1:
-            per_page = self._get_dataclass_fields('per_page').default
+            per_page = self._get_dataclass_field('per_page').default
         self.per_page = per_page
 
     def _normalize_sort(self):
-        self.sort = None if self.sort == '' or self.sort is None \
+        self.sort = None if self.sort == "" or self.sort is None \
             else str(self.sort)
 
     def _normalize_sort_dir(self):
@@ -85,19 +91,18 @@ class SearchParams(Generic[Filter]):
         sort_dir = str(self.sort_dir).lower()
         self.sort_dir = 'asc' if sort_dir not in ['asc', 'desc'] else sort_dir
 
-    def _normalize_filter(self) -> filter:
+    def _normalize_filter(self):
         self.filter = None if self.filter == "" or self.filter is None \
             else str(self.filter)
 
-    def _convert_to_int(self, value: Any, default=0) -> int:
+    def _convert_to_int(self, value: Any, default=0) -> int:  # pylint: disable=no-self-use
         try:
             return int(value)
         except (ValueError, TypeError):
             return default
 
-    def _get_dataclass_fields(self, field_name):
-        # pylint: disable=no-member
-        return SearchParams.__dataclass_fields__[field_name]
+    def _get_dataclass_field(self, field_name):  # pylint: disable=no-self-use
+        return SearchParams.__dataclass_fields__[field_name]  # pylint: disable=no-member
 
 
 # repository in memory
