@@ -4,6 +4,7 @@ from dataclasses import is_dataclass
 from typing import Optional
 import unittest
 from unittest.mock import patch
+from core.category.application.dto import CategoryOutput
 
 from core.category.application.use_cases import CreateCategoryUseCase, GetCategoryUseCase
 from core.category.infra.repositories import CategoryInMemoryRepository
@@ -44,6 +45,14 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
             'is_active']
         self.assertEqual(is_active_field.default,
                          Category.get_fields('is_active').default)
+
+    def test_output(self):
+        self.assertTrue(
+            issubclass(
+                CreateCategoryUseCase.Output,
+                CategoryOutput
+            )
+        )
 
     def test_execute(self):
         with patch.object(
@@ -116,6 +125,14 @@ class TestGetCategoryUseCaseUnit(unittest.TestCase):
         self.assertEqual(
             assert_error.exception.args[0], "Entity not found using ID 'fake id'")
 
+    def test_output(self):
+        self.assertTrue(
+            issubclass(
+                GetCategoryUseCase.Output,
+                CategoryOutput
+            )
+        )
+ 
     def test_execute(self):
         category = Category(name='Movie')
         self.category_repo.items = [category]
