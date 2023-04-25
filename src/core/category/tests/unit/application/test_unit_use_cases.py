@@ -1,11 +1,13 @@
 
 
 from dataclasses import is_dataclass
+from typing import Optional
 import unittest
 from unittest.mock import patch
 
 from core.category.application.use_cases import CreateCategoryUseCase
 from core.category.infra.repositories import CategoryInMemoryRepository
+from core.category.domain.entities import Category
 
 
 class TestCreateCategoryUseCaseUnit(unittest.TestCase):
@@ -19,6 +21,27 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
 
     def test_if_is_a_dataclass(self):
         self.assertTrue(is_dataclass(CreateCategoryUseCase))
+
+    def test_input(self):
+        self.assertTrue(is_dataclass(CreateCategoryUseCase.Input))
+        self.assertEqual(
+            CreateCategoryUseCase.Input.__annotations__,
+            {
+                'name': str,
+                'description': Optional[str],
+                'is_active': Optional[bool],
+            }
+        )
+        #pylint: disable=no-member
+        description_field = CreateCategoryUseCase.Input.__dataclass_fields__[
+            'description']
+        self.assertEqual(description_field.default,
+                         Category.get_fields('description').default)
+
+        is_active_field = CreateCategoryUseCase.Input.__dataclass_fields__[
+            'is_active']
+        self.assertEqual(is_active_field.default,
+                         Category.get_fields('is_active').default)
 
     def test_execute(self):
         with patch.object(
@@ -39,7 +62,7 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
 
         input_param = CreateCategoryUseCase.Input(
             name='Movie',
-            description='some description', 
+            description='some description',
             is_active=False
         )
         output = self.use_case.execute(input_param)
@@ -55,7 +78,7 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
             name='Movie',
             description='some description',
             is_active=True
-            )
+        )
         output = self.use_case.execute(input_param)
         self.assertEqual(output, CreateCategoryUseCase.Output(
             id=self.category_repo.items[2].id,
