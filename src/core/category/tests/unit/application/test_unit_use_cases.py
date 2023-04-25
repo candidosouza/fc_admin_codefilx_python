@@ -1,13 +1,15 @@
-
+# pylint: disable=unexpected-keyword-arg
 
 from dataclasses import is_dataclass
 from typing import Optional
 import unittest
 from unittest.mock import patch
 
-from core.category.application.use_cases import CreateCategoryUseCase
+from core.category.application.use_cases import CreateCategoryUseCase, GetCategoryUseCase
 from core.category.infra.repositories import CategoryInMemoryRepository
 from core.category.domain.entities import Category
+
+from core.__seedwork.domain.exceptions import NotFoundException
 
 
 class TestCreateCategoryUseCaseUnit(unittest.TestCase):
@@ -87,3 +89,48 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
             is_active=True,
             created_at=self.category_repo.items[2].created_at
         ))
+
+
+class TestGetCategoryUseCaseUnit(unittest.TestCase):
+
+    use_case: GetCategoryUseCase
+    category_repo: CategoryInMemoryRepository
+
+    def setUp(self) -> None:
+        self.category_repo = CategoryInMemoryRepository()
+        self.use_case = GetCategoryUseCase(self.category_repo)
+
+    def test_if_is_a_dataclass(self):
+        self.assertTrue(is_dataclass(CreateCategoryUseCase))
+
+    def test_input(self):
+        self.assertTrue(is_dataclass(GetCategoryUseCase.Input))
+        self.assertEqual(GetCategoryUseCase.Input.__annotations__, {
+            'id': str,
+        })
+
+    def test_throws_exception_when_category_not_found(self):
+        input_param = GetCategoryUseCase.Input('fake id')
+        with self.assertRaises(NotFoundException) as assert_error:
+            self.use_case.execute(input_param)
+        self.assertEqual(
+            assert_error.exception.args[0], "Entity not found using ID 'fake id'")
+
+    def test_execute(self):
+        category = Category(name='Movie')
+        self.category_repo.items = [category]
+        with patch.object(
+            self.category_repo,
+            'find_by_id',
+            wraps=self.category_repo.find_by_id
+        ) as spy_find_by_id:
+            input_param = GetCategoryUseCase.Input(category.id)
+            output = self.use_case.execute(input_param)
+            spy_find_by_id.assert_called_once()
+            self.assertEqual(output, GetCategoryUseCase.Output(
+                id=self.category_repo.items[0].id,
+                name='Movie',
+                description=None,
+                is_active=True,
+                created_at=self.category_repo.items[0].created_at
+            ))
