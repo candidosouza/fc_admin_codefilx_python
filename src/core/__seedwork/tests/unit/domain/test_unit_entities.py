@@ -1,8 +1,6 @@
-# pylint: disable=unexpected-keyword-arg
-
 import unittest
 from abc import ABC
-from dataclasses import dataclass, is_dataclass, FrozenInstanceError
+from dataclasses import dataclass, is_dataclass
 
 from core.__seedwork.domain.entities import Entity
 from core.__seedwork.domain.value_objects import UniqueEntityId
@@ -57,6 +55,5 @@ class TestEntityUnit(unittest.TestCase):
 
     def test_set_method(self):
         entity = StubEntity(prop1='value1', prop2='value2',)
-        # pylint: disable=protected-access
-        entity._set('prop1', 'changed')
+        entity._set('prop1', 'changed')  # pylint: disable=protected-access
         self.assertEqual(entity.prop1, 'changed')

@@ -24,6 +24,7 @@ Com DDD e Clean Architecture
 * Autopep8
 * Pylint
 * pytest
+* pytest-cov
 * Django
 * DRF (Django Rest Framework)
 * Git
@@ -57,4 +58,37 @@ python -m unittest core.category.tests.unit.domain.test_unit_entities
 
 ```
 python -m unittest core.__seedwork.tests.unit.domain.test_unit_repository
+```
+
+## coverage
+
+```
+pytest --ignore __pypackages__ --cov ./src
+```
+ou
+```
+pytest --ignore __pypackages__ --cov ./src --cov-report html:./__coverage
+```
+ou com pdm
+```
+pdm run test
+```
+```
+pdm run test_cov 
+```
+```
+pdm run test_cov_html 
+```
+
+
+### alinha todos os arquivos
+
+```
+autopep8 --in-place --recursive ./src
+```
+
+ou 
+
+```
+pdm run autopep8
 ```

@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from core.__seedwork.domain.validators import ErrorFields
 
+
 class InvalidUuidException(Exception):
     def __init__(self, error='ID must be a valid UUID') -> None:
         super().__init__(error)

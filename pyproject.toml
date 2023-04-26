@@ -24,6 +24,13 @@ dependencies = [
     "opentelemetry-instrumentation-django>=0.38b0",
     "requests>=2.28.2",
     "opentelemetry-exporter-prometheus>=1.12.0rc1",
+    "pytest-cov>=4.0.0",
 ]
+[tool.pdm.scripts]
+pep8 = "autopep8 --in-place --recursive ./src"
+pylint = "pylint ./src"
+test = "pytest --ignore __pypackages__"
+test_cov = "pdm run test --cov ./src --cov-fail-under 80"
+test_cov_html = "pdm run test_cov --cov-report html:./__coverage"
 requires-python = ">=3.10.2"
 license = {text = "n"}

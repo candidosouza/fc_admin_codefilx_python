@@ -1,7 +1,6 @@
-# pylint: disable=unexpected-keyword-arg
+
 import unittest
 from core.category.domain.entities import Category
-# , ValidationException
 from core.__seedwork.domain.exceptions import EntityValidationException
 
 

@@ -56,14 +56,14 @@ MIDDLEWARE = [
 ]
 
 ELASTIC_APM = {
-  # Set required service name. Allowed characters:
-  # a-z, A-Z, 0-9, -, _, and space
-  'SERVICE_NAME': 'fcadminpython',
+    # Set required service name. Allowed characters:
+    # a-z, A-Z, 0-9, -, _, and space
+    'SERVICE_NAME': 'fcadminpython',
 
-  # Set custom APM Server URL (default: http://localhost:8200)
-  'SERVER_URL': 'http://apm:8200',
-  'DEBUG': True,
-  'ENVIRONMENT': 'production',
+    # Set custom APM Server URL (default: http://localhost:8200)
+    'SERVER_URL': 'http://apm:8200',
+    'DEBUG': True,
+    'ENVIRONMENT': 'production',
 }
 
 ROOT_URLCONF = 'django_app.urls'
@@ -150,8 +150,10 @@ CACHES = {
 }
 
 # prometheus configuration
-PROMETHEUS_LATENCY_BUCKETS = (0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0, 2.5, 5.0, 7.5, 10.0, 25.0, 50.0, 75.0, float("inf"),)
-PROMETHEUS_LATENCY_BUCKETS = (.1, .2, .5, .6, .8, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.5, 9.0, 12.0, 15.0, 20.0, 30.0, float("inf"))
+PROMETHEUS_LATENCY_BUCKETS = (0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5,
+                              0.75, 1.0, 2.5, 5.0, 7.5, 10.0, 25.0, 50.0, 75.0, float("inf"),)
+PROMETHEUS_LATENCY_BUCKETS = (.1, .2, .5, .6, .8, 1.0, 2.0, 3.0,
+                              4.0, 5.0, 6.0, 7.5, 9.0, 12.0, 15.0, 20.0, 30.0, float("inf"))
 # prometheus "/prometheus/metrics"
 # ROOT_URLCONF = "django_app.urls_prometheus_wrapper"
 
@@ -226,4 +228,3 @@ OPENTELEMETRY_DJANGO_INSTRUMENT = True
 #         'opentelemetry.trace.propagation.skeleton_format.SkeletonFormatPropagator',
 #     ],
 # }
-
