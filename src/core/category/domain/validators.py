@@ -13,7 +13,7 @@ class CategoryRules(serializers.Serializer): # pylint: disable=abstract-method
     created_at = serializers.DateTimeField(required=False)
 
 
-class CategoryValidator(DRFValidator):
+class CategoryValidator(DRFValidator): # pylint: disable=too-few-public-methods
     def validate(self, data: Dict) -> bool:
         rules = CategoryRules(data=data if data is not None else {})
         return super().validate(rules)

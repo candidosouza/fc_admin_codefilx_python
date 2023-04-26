@@ -15,6 +15,13 @@ class _SearchResult(DefaultSearchResult): # pylint: disable=too-few-public-metho
     pass
 
 
-class CategoryRepository(SearchableRepositoryInterface[Category, _SearchParams, _SearchResult], ABC):
+class CategoryRepository(
+    SearchableRepositoryInterface[
+        Category,
+        _SearchParams,
+        _SearchResult
+    ],
+    ABC
+):
     SearchParams = _SearchParams
     SearchResult = _SearchResult

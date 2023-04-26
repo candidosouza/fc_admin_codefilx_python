@@ -16,7 +16,7 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
         entity = Category(name='Movie')
         items = [entity]
 
-        
+
         items_filtered = self.repo._apply_filter(items, None) # pylint: disable=protected-access
         self.assertListEqual(items_filtered, items)
 
@@ -26,7 +26,7 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             Category(name='TEST'),
             Category(name='fake'),
         ]
-        
+
         items_filtered = self.repo._apply_filter(items, 'TEST') # pylint: disable=protected-access
         self.assertListEqual(items_filtered, [items[0], items[1]])
 
@@ -38,7 +38,7 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             Category(name='fake', created_at=timezone.now() +
                      timedelta(seconds=200)),
         ]
-        
+
         items_filtered = self.repo._apply_sort(items, None, None) # pylint: disable=protected-access
         self.assertListEqual(items_filtered, [items[2], items[1], items[0]])
 
@@ -49,10 +49,8 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             Category(name='abc'),
         ]
 
-        
         items_filtered = self.repo._apply_sort(items, "name", "asc") # pylint: disable=protected-access
         self.assertListEqual(items_filtered, [items[2], items[1], items[0]])
 
-        
         items_filtered = self.repo._apply_sort(items, "name", "desc") # pylint: disable=protected-access
         self.assertListEqual(items_filtered, [items[0], items[1], items[2]])

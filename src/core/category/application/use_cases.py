@@ -23,7 +23,7 @@ class CreateCategoryUseCase(UseCase):
         self.category_repository.insert(category)
         return self.__to_output(category)
 
-    def __to_output(self, category: Category):  # pylint: disable=no-self-use
+    def __to_output(self, category: Category):  # pylint: disable=useless-option-value
         return CategoryOutputMapper\
             .from_child(CreateCategoryUseCase.Output)\
             .to_output(category)
@@ -48,7 +48,7 @@ class GetCategoryUseCase(UseCase):
         category = self.category_repository.find_by_id(input_param.id)
         return self.__to_output(category)
 
-    def __to_output(self, category: Category):  # pylint: disable=no-self-use
+    def __to_output(self, category: Category):  # pylint: disable=useless-option-value
         return CategoryOutputMapper.from_child(GetCategoryUseCase.Output).to_output(category)
 
     @dataclass(slots=True, frozen=True)
@@ -70,7 +70,7 @@ class ListCategoriesUseCase(UseCase):
         result = self.category_repo.search(search_params)
         return self.__to_output(result)
 
-    def __to_output(self, result: CategoryRepository.SearchResult):  # pylint: disable=no-self-use
+    def __to_output(self, result: CategoryRepository.SearchResult):  # pylint: disable=useless-option-value
         items = list(
             map(CategoryOutputMapper.without_child().to_output, result.items)
         )
@@ -88,3 +88,52 @@ class ListCategoriesUseCase(UseCase):
     @dataclass(slots=True, frozen=True)
     class Output(PaginationOutput[CategoryOutput]):
         pass
+
+
+@dataclass(slots=True, frozen=True)
+class UpdateCategoryUseCase(UseCase):
+
+    category_repo: CategoryRepository
+
+    def execute(self, input_param: 'Input') -> 'Output': #Arquitetura Hexagonal
+        entity = self.category_repo.find_by_id(input_param.id)
+        entity.update(input_param.name, input_param.description)
+
+        if input_param.is_active is True:
+            entity.activate()
+
+        if input_param.is_active is False:
+            entity.deactivate()
+
+        self.category_repo.update(entity)
+        return self.__to_output(entity)
+
+    def __to_output(self, category: Category) -> 'Output':  # pylint: disable=useless-option-value
+        return CategoryOutputMapper\
+            .from_child(UpdateCategoryUseCase.Output)\
+            .to_output(category)
+
+    @dataclass(slots=True, frozen=True)
+    class Input:
+        id: str  # pylint: disable=invalid-name
+        name: str
+        description: Optional[str] = Category.get_fields(
+            'description').default
+        is_active: Optional[bool] = Category.get_fields('is_active').default
+
+    @dataclass(slots=True, frozen=True)
+    class Output(CategoryOutput):
+        pass
+
+
+@dataclass(slots=True, frozen=True)
+class DeleteCategoryUseCase(UseCase):
+
+    category_repo: CategoryRepository
+
+    def execute(self, input_param: 'Input') -> None:
+        self.category_repo.delete(input_param.id)
+
+    @dataclass(slots=True, frozen=True)
+    class Input:
+        id: str  # pylint: disable=invalid-name

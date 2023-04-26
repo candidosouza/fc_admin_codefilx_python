@@ -12,7 +12,7 @@ class Entity(ABC):
         default_factory=lambda: UniqueEntityId()) # pylint: disable=unnecessary-lambda
 
     @property
-    def id(self):
+    def id(self): # pylint: disable=invalid-name
         return str(self.unique_entity_id)
 
     def _set(self, name: str, value: Any):

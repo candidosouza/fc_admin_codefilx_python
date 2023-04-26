@@ -111,7 +111,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
         for data in invalid_data:
             message = f'value: {data["value"]}, prop: {data["prop"]}'
             with self.assertRaises(ValidationException, msg=message) as assert_rules:
-                
+
                 ValidatorRules.values( # pylint: disable=expression-not-assigned
                     data['value'], data['prop']
                 ).min_length(3)
@@ -287,7 +287,7 @@ class TestDRFValidatorsUnit(unittest.TestCase):
 
 class TestStrictCharFieldUnit(unittest.TestCase):
     def test_if_is_valid_when_not_str_values(self):
-        class StubStrictCharFieldSerializer(serializers.Serializer):
+        class StubStrictCharFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
             name = StrictCharField()
 
         serializer = StubStrictCharFieldSerializer(data={'name': 7})
@@ -297,14 +297,14 @@ class TestStrictCharFieldUnit(unittest.TestCase):
         })
 
     def test_none_value_is_valid(self):
-        class StubStrictCharFieldSerializer(serializers.Serializer):
+        class StubStrictCharFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
             name = StrictCharField(required=True, allow_null=True)
 
         serializer = StubStrictCharFieldSerializer(data={'name': None})
         self.assertTrue(serializer.is_valid())
 
     def test_is_valid(self):
-        class StubStrictCharFieldSerializer(serializers.Serializer):
+        class StubStrictCharFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
             name = StrictCharField(required=True, allow_null=True)
 
         serializer = StubStrictCharFieldSerializer(data={'name': 'some value'})
@@ -314,7 +314,7 @@ class TestStrictCharFieldUnit(unittest.TestCase):
 
 class TestStrictBolleanFieldUnit(unittest.TestCase):
     def test_if_is_valid_when_not_str_values(self):
-        class StubStrictBolleanFieldSerializer(serializers.Serializer):
+        class StubStrictBolleanFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
             active = StrictBooleanField()
 
         message_error = 'Must be a valid boolean.'
@@ -344,7 +344,7 @@ class TestStrictBolleanFieldUnit(unittest.TestCase):
         })
 
     def test_is_valid(self):
-        class StubStrictBolleanFieldSerializer(serializers.Serializer):
+        class StubStrictBolleanFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
             active = StrictBooleanField()
 
         serializer = StubStrictBolleanFieldSerializer(data={'active': True})
