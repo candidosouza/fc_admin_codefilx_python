@@ -25,3 +25,8 @@ class Entity(ABC):
         entity_dict.pop('unique_entity_id')
         entity_dict['id'] = self.id
         return entity_dict
+
+    @classmethod
+    def get_fields(cls, entity_fields: str) -> field:
+        # pylint: disable=no-member
+        return cls.__dataclass_fields__[entity_fields]
