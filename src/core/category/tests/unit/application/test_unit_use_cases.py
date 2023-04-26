@@ -4,6 +4,7 @@ from dataclasses import is_dataclass
 from typing import Optional
 import unittest
 from unittest.mock import patch
+from core.__seedwork.application.use_cases import UseCase
 from core.category.application.dto import CategoryOutput
 
 from core.category.application.use_cases import CreateCategoryUseCase, GetCategoryUseCase
@@ -24,6 +25,9 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
 
     def test_if_is_a_dataclass(self):
         self.assertTrue(is_dataclass(CreateCategoryUseCase))
+
+    def test_if_instance_a_use_case(self):
+        self.assertIsInstance(self.use_case, UseCase)
 
     def test_input(self):
         self.assertTrue(is_dataclass(CreateCategoryUseCase.Input))
@@ -108,6 +112,9 @@ class TestGetCategoryUseCaseUnit(unittest.TestCase):
     def setUp(self) -> None:
         self.category_repo = CategoryInMemoryRepository()
         self.use_case = GetCategoryUseCase(self.category_repo)
+
+    def test_if_instance_a_use_case(self):
+        self.assertIsInstance(self.use_case, UseCase)
 
     def test_if_is_a_dataclass(self):
         self.assertTrue(is_dataclass(CreateCategoryUseCase))
