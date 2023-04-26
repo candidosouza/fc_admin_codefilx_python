@@ -1,5 +1,5 @@
-# pylint: disable=unexpected-keyword-arg
-from datetime import datetime, timedelta
+
+from datetime import timedelta
 from dataclasses import is_dataclass
 from typing import Optional
 import unittest
@@ -43,13 +43,13 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
                 'is_active': Optional[bool],
             }
         )
-        # pylint: disable=no-member
-        description_field = CreateCategoryUseCase.Input.__dataclass_fields__[
+        
+        description_field = CreateCategoryUseCase.Input.__dataclass_fields__[ # pylint: disable=no-member
             'description']
         self.assertEqual(description_field.default,
                          Category.get_fields('description').default)
 
-        is_active_field = CreateCategoryUseCase.Input.__dataclass_fields__[
+        is_active_field = CreateCategoryUseCase.Input.__dataclass_fields__[ # pylint: disable=no-member
             'is_active']
         self.assertEqual(is_active_field.default,
                          Category.get_fields('is_active').default)

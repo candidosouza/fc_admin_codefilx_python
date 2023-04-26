@@ -7,14 +7,13 @@ from core.category.domain.validators import CategoryValidatorFactory
 from core.__seedwork.domain.exceptions import EntityValidationException
 
 
-# pylint: disable=unnecessary-lambda
 @dataclass(kw_only=True, frozen=True, slots=True)
 class Category(Entity):
     name: str
     description: Optional[str] = None
     is_active: Optional[bool] = True
     created_at: Optional[datetime] = field(
-        default_factory=lambda: datetime.now())
+        default_factory=lambda: datetime.now()) # pylint: disable=unnecessary-lambda
 
     def __post_init__(self):
         if not self.created_at:

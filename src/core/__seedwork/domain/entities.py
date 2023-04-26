@@ -8,9 +8,8 @@ from core.__seedwork.domain.value_objects import UniqueEntityId
 @dataclass(frozen=True, slots=True)
 class Entity(ABC):
 
-    # pylint: disable=unnecessary-lambda
     unique_entity_id: UniqueEntityId = field(
-        default_factory=lambda: UniqueEntityId())
+        default_factory=lambda: UniqueEntityId()) # pylint: disable=unnecessary-lambda
 
     @property
     def id(self):
@@ -28,5 +27,4 @@ class Entity(ABC):
 
     @classmethod
     def get_fields(cls, entity_fields: str) -> field:
-        # pylint: disable=no-member
-        return cls.__dataclass_fields__[entity_fields]
+        return cls.__dataclass_fields__[entity_fields] # pylint: disable=no-member

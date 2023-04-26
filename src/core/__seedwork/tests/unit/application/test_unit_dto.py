@@ -1,4 +1,3 @@
-# pylint: disable=unexpected-keyword-arg
 from typing import List, Optional
 import unittest
 from core.__seedwork.application.dto import (

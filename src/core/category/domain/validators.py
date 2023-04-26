@@ -2,10 +2,10 @@ from typing import Dict
 from rest_framework import serializers
 from core.__seedwork.domain.validators import DRFValidator, StrictBooleanField, StrictCharField
 
-# pylint: disable=abstract-method
 
 
-class CategoryRules(serializers.Serializer):
+
+class CategoryRules(serializers.Serializer): # pylint: disable=abstract-method
     name = StrictCharField(max_length=255, min_length=3)
     description = StrictCharField(
         required=False, allow_null=True, allow_blank=True)

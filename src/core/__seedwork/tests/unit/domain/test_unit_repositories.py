@@ -22,8 +22,7 @@ class TestRepositoryInterface(unittest.TestCase):
 
     def test_throw_error_when_methods_not_implemented(self):
         with self.assertRaises(TypeError) as assert_error:
-            # pylint: disable=abstract-class-instantiated
-            RepositoryInterface()
+            RepositoryInterface() # pylint: disable=abstract-class-instantiated
         self.assertEqual(assert_error.exception.args[0],
                          "Can't instantiate abstract class RepositoryInterface with abstract " +
                          "methods delete, find_all, find_by_id, insert, update"
@@ -134,8 +133,7 @@ class TestSearchableRepositoryInterface(unittest.TestCase):
 
     def test_throw_error_when_methods_not_implemented(self):
         with self.assertRaises(TypeError) as assert_error:
-            # pylint: disable=abstract-class-instantiated
-            SearchableRepositoryInterface()
+            SearchableRepositoryInterface() # pylint: disable=abstract-class-instantiated
         self.assertEqual(
             "Can't instantiate abstract class SearchableRepositoryInterface with abstract " +
             "methods delete, find_all, find_by_id, insert, search, update",
@@ -370,8 +368,7 @@ class TestInMemorySearchableRepository(unittest.TestCase):
 
     def test__apply_filter(self):
         items = [StubEntity(name='test', price=5)]
-        # pylint: disable=protected-access
-        result = self.repo._apply_filter(items, None)
+        result = self.repo._apply_filter(items, None) # pylint: disable=protected-access
         self.assertEqual(items, result)
 
         items = [
@@ -380,11 +377,9 @@ class TestInMemorySearchableRepository(unittest.TestCase):
             StubEntity(name='fake', price=0),
         ]
 
-        # pylint: disable=protected-access
         result = self.repo._apply_filter(items, 'TEST')
         self.assertEqual([items[0], items[1]], result)
 
-        # pylint: disable=protected-access
         result = self.repo._apply_filter(items, '5')
         self.assertEqual([items[0], items[1]], result)
 
