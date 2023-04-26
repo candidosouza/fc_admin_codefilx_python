@@ -79,3 +79,16 @@ pdm run test_cov
 ```
 pdm run test_cov_html 
 ```
+
+
+### alinha todos os arquivos
+
+```
+autopep8 --in-place --recursive ./src
+```
+
+ou 
+
+```
+pdm run autopep8
+```
