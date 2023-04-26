@@ -15,6 +15,8 @@ Com DDD e Clean Architecture
 * Conventional Commits
 * CI
 * Observabilidade
+* Repository Pattern
+* Use Cases
 
 
 > ## Bibliotecas e Ferramentas
