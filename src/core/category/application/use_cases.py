@@ -1,15 +1,16 @@
 # pylint: disable=unexpected-keyword-arg
 
 from dataclasses import dataclass
-from datetime import datetime
 from typing import Optional
-from core.category.application.dto import CategoryOutput
+from core.category.application.dto import CategoryOutput, CategoryOutputMapper
 from core.category.domain.entities import Category
 from core.category.domain.repositories import CategoryRepository
 
+from core.__seedwork.application.use_cases import UseCase
+
 
 @dataclass(slots=True, frozen=True)
-class CreateCategoryUseCase:
+class CreateCategoryUseCase(UseCase):
 
     category_repository: CategoryRepository
 
@@ -20,13 +21,12 @@ class CreateCategoryUseCase:
             is_active=input_param.is_active
         )
         self.category_repository.insert(category)
-        return self.Output(
-            id=category.id,
-            name=category.name,
-            description=category.description,
-            is_active=category.is_active,
-            created_at=category.created_at
-        )
+        return self.__to_output(category)
+
+    def __to_output(self, category: Category):  # pylint: disable=no-self-use
+        return CategoryOutputMapper\
+            .from_child(CreateCategoryUseCase.Output)\
+            .to_output(category)
 
     @dataclass(slots=True, frozen=True)
     class Input:
@@ -39,25 +39,21 @@ class CreateCategoryUseCase:
         pass
 
 
-
 @dataclass(slots=True, frozen=True)
-class GetCategoryUseCase:
+class GetCategoryUseCase(UseCase):
 
-    category_repository: CategoryRepository
+    category_repo: CategoryRepository
 
     def execute(self, input_param: 'Input') -> 'Output':
-        category = self.category_repository.find_by_id(input_param.id)
-        return self.Output(
-            id=category.id,
-            name=category.name,
-            description=category.description,
-            is_active=category.is_active,
-            created_at=category.created_at
-        )
+        category = self.category_repo.find_by_id(input_param.id)
+        return self.__to_output(category)
+
+    def __to_output(self, category: Category):  # pylint: disable=no-self-use
+        return CategoryOutputMapper.from_child(GetCategoryUseCase.Output).to_output(category)
 
     @dataclass(slots=True, frozen=True)
     class Input:
-        id: str
+        id: str  # pylint: disable=invalid-name
 
     @dataclass(slots=True, frozen=True)
     class Output(CategoryOutput):
