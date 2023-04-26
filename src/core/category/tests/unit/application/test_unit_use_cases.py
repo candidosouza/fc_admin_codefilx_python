@@ -1,17 +1,21 @@
 # pylint: disable=unexpected-keyword-arg
-
+from datetime import datetime, timedelta
 from dataclasses import is_dataclass
 from typing import Optional
 import unittest
 from unittest.mock import patch
-from core.__seedwork.application.use_cases import UseCase
-from core.category.application.dto import CategoryOutput
 
-from core.category.application.use_cases import CreateCategoryUseCase, GetCategoryUseCase
+from django.utils import timezone
+
+from core.__seedwork.application.use_cases import UseCase
+from core.__seedwork.application.dto import PaginationOutput, PaginationOutputMapper, SearchInput
+from core.__seedwork.domain.exceptions import NotFoundException
+from core.category.application.dto import CategoryOutput, CategoryOutputMapper
+
+from core.category.application.use_cases import CreateCategoryUseCase, GetCategoryUseCase, ListCategoriesUseCase
+from core.category.domain.repositories import CategoryRepository
 from core.category.infra.repositories import CategoryInMemoryRepository
 from core.category.domain.entities import Category
-
-from core.__seedwork.domain.exceptions import NotFoundException
 
 
 class TestCreateCategoryUseCaseUnit(unittest.TestCase):
@@ -158,3 +162,183 @@ class TestGetCategoryUseCaseUnit(unittest.TestCase):
                 is_active=True,
                 created_at=self.category_repo.items[0].created_at
             ))
+
+
+class TestListCategoriesUseCase(unittest.TestCase):
+
+    use_case: ListCategoriesUseCase
+    category_repo: CategoryInMemoryRepository
+
+    def setUp(self) -> None:
+        self.category_repo = CategoryInMemoryRepository()
+        self.use_case = ListCategoriesUseCase(self.category_repo)
+
+    def test_instance_use_case(self):
+        self.assertIsInstance(self.use_case, UseCase)
+
+    def test_input(self):
+        self.assertTrue(issubclass(
+            ListCategoriesUseCase.Input, SearchInput))
+
+    def test_output(self):
+        self.assertTrue(issubclass(
+            ListCategoriesUseCase.Output, PaginationOutput))
+
+    def test__to_output(self):
+        entity = Category(name='Movie')
+        default_props = {
+            'total': 1,
+            'current_page': 1,
+            'per_page': 2,
+            'sort': None,
+            'sort_dir': None,
+            'filter': None
+        }
+
+        result = CategoryRepository.SearchResult(items=[], **default_props)
+        output = self.use_case._ListCategoriesUseCase__to_output(  # pylint: disable=protected-access
+            result
+        )
+        self.assertEqual(output, ListCategoriesUseCase.Output(
+            items=[],
+            total=1,
+            current_page=1,
+            per_page=2,
+            last_page=1,
+        ))
+
+        result = CategoryRepository.SearchResult(
+            items=[entity], **default_props)
+        output = self.use_case._ListCategoriesUseCase__to_output(  # pylint: disable=protected-access
+            result
+        )
+        items = [CategoryOutputMapper.without_child().to_output(entity)]
+        self.assertEqual(
+            output,
+            PaginationOutputMapper
+            .from_child(ListCategoriesUseCase.Output)
+            .to_output(
+                items,
+                result
+            ))
+
+    def test_execute_using_empty_search_params(self):
+        self.category_repo.items = [
+            Category(name='test 1'),
+            Category(name='test 2', created_at=timezone.now() +
+                     timedelta(seconds=200)),
+        ]
+        with patch.object(
+            self.category_repo,
+            'search',
+            wraps=self.category_repo.search
+        ) as spy_search:
+            input_param = ListCategoriesUseCase.Input()
+            output = self.use_case.execute(input_param)
+            spy_search.assert_called_once()
+            self.assertEqual(output, ListCategoriesUseCase.Output(
+                items=list(
+                    map(
+                        CategoryOutputMapper.without_child().to_output,
+                        self.category_repo.items[::-1]
+                    )
+                ),
+                total=2,
+                current_page=1,
+                per_page=15,
+                last_page=1
+            ))
+
+    def test_execute_using_pagination_and_sort_and_filter(self):
+        items = [
+            Category(name='aaa'),
+            Category(name='AAA'),  # asci
+            Category(name='AaA'),
+            Category(name='bbb'),
+            Category(name='ccc'),
+        ]
+        self.category_repo.items = items
+
+        input_param = ListCategoriesUseCase.Input(
+            page=1,
+            per_page=2,
+            sort='name',
+            sort_dir='asc',
+            filter='a'
+        )
+        output = self.use_case.execute(input_param)
+        self.assertEqual(output, ListCategoriesUseCase.Output(
+            items=list(
+                map(
+                    CategoryOutputMapper.without_child().to_output,
+                    [items[1], items[2]]
+                )
+            ),
+            total=3,
+            current_page=1,
+            per_page=2,
+            last_page=2
+        ))
+
+        input_param = ListCategoriesUseCase.Input(
+            page=2,
+            per_page=2,
+            sort='name',
+            sort_dir='asc',
+            filter='a'
+        )
+        output = self.use_case.execute(input_param)
+        self.assertEqual(output, ListCategoriesUseCase.Output(
+            items=list(
+                map(
+                    CategoryOutputMapper.without_child().to_output,
+                    [items[0]]
+                )
+            ),
+            total=3,
+            current_page=2,
+            per_page=2,
+            last_page=2
+        ))
+
+        input_param = ListCategoriesUseCase.Input(
+            page=1,
+            per_page=2,
+            sort='name',
+            sort_dir='desc',
+            filter='a'
+        )
+        output = self.use_case.execute(input_param)
+        self.assertEqual(output, ListCategoriesUseCase.Output(
+            items=list(
+                map(
+                    CategoryOutputMapper.without_child().to_output,
+                    [items[0], items[2]]
+                )
+            ),
+            total=3,
+            current_page=1,
+            per_page=2,
+            last_page=2
+        ))
+
+        input_param = ListCategoriesUseCase.Input(
+            page=2,
+            per_page=2,
+            sort='name',
+            sort_dir='desc',
+            filter='a'
+        )
+        output = self.use_case.execute(input_param)
+        self.assertEqual(output, ListCategoriesUseCase.Output(
+            items=list(
+                map(
+                    CategoryOutputMapper.without_child().to_output,
+                    [items[1]]
+                )
+            ),
+            total=3,
+            current_page=2,
+            per_page=2,
+            last_page=2
+        ))
