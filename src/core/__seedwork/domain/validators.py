@@ -14,6 +14,7 @@ from core.__seedwork.domain.exceptions import ValidationException
 if not settings.configured:
     settings.configure(USE_I18N=False)
 
+
 @dataclass(frozen=True, slots=True)
 class ValidatorRules:
     value: Any

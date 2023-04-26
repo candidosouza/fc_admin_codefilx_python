@@ -43,7 +43,7 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
                 'is_active': Optional[bool],
             }
         )
-        #pylint: disable=no-member
+        # pylint: disable=no-member
         description_field = CreateCategoryUseCase.Input.__dataclass_fields__[
             'description']
         self.assertEqual(description_field.default,
@@ -143,7 +143,7 @@ class TestGetCategoryUseCaseUnit(unittest.TestCase):
                 CategoryOutput
             )
         )
- 
+
     def test_execute(self):
         category = Category(name='Movie')
         self.category_repo.items = [category]

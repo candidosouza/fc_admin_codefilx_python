@@ -19,6 +19,7 @@ class TestCategoryOutputUnit(unittest.TestCase):
             'created_at': datetime
         })
 
+
 class CategoryOutputChild(CategoryOutput):  # pylint: disable=too-few-public-methods
     pass
 

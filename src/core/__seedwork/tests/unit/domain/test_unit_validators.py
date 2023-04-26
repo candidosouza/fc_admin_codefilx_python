@@ -230,7 +230,8 @@ class TestValidatorsRulesUnit(unittest.TestCase):
 
     def test_valid_cases_for_combination_between_rules(self):
         ValidatorRules.values('test', 'prop').required().string()
-        ValidatorRules.values('x' * 5, 'prop').required().string().max_length(5)
+        ValidatorRules.values(
+            'x' * 5, 'prop').required().string().max_length(5)
 
         ValidatorRules.values(True, 'prop').required().boolean()
         ValidatorRules.values(False, 'prop').required().boolean()
@@ -257,7 +258,7 @@ class TestValidatorFieldsInsterfaceUnit(unittest.TestCase):
 
         validated_data_field = fields_class[1]
         self.assertEqual(validated_data_field.name, 'validated_data')
-        self.assertIsNone(validated_data_field.default) 
+        self.assertIsNone(validated_data_field.default)
 
 
 class TestDRFValidatorsUnit(unittest.TestCase):

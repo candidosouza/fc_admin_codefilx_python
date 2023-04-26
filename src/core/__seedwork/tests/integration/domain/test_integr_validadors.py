@@ -24,4 +24,5 @@ class TestDRFValidatorsIntegration(unittest.TestCase):
         serializer = StubSerializer(data={'name': 'some value', 'price': 7})
         is_valid = validator.validate(serializer)
         self.assertTrue(is_valid)
-        self.assertEqual(validator.validated_data, {'name': 'some value', 'price': '7'})
+        self.assertEqual(validator.validated_data, {
+                         'name': 'some value', 'price': '7'})

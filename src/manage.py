@@ -28,7 +28,6 @@ resource = Resource(attributes={
 # on-demand to respond to scrape requests
 
 
-
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_app.settings')
