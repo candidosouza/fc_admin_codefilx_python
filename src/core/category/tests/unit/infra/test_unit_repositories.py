@@ -16,8 +16,8 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
         entity = Category(name='Movie')
         items = [entity]
 
-        items_filtered = self.repo._apply_filter(
-            items, None)  # pylint: disable=protected-access
+        items_filtered = self.repo._apply_filter(  # pylint: disable=protected-access
+            items, None)
         self.assertListEqual(items_filtered, items)
 
     def test_filter(self):
@@ -27,8 +27,8 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             Category(name='fake'),
         ]
 
-        items_filtered = self.repo._apply_filter(
-            items, 'TEST')  # pylint: disable=protected-access
+        items_filtered = self.repo._apply_filter(  # pylint: disable=protected-access
+            items, 'TEST')
         self.assertListEqual(items_filtered, [items[0], items[1]])
 
     def test_sort_by_created_at_when_sort_param_is_null(self):
@@ -40,8 +40,8 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
                      timedelta(seconds=200)),
         ]
 
-        items_filtered = self.repo._apply_sort(
-            items, None, None)  # pylint: disable=protected-access
+        items_filtered = self.repo._apply_sort(  # pylint: disable=protected-access
+            items, None, None)
         self.assertListEqual(items_filtered, [items[2], items[1], items[0]])
 
     def test_sort_by_name(self):
@@ -51,10 +51,10 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             Category(name='abc'),
         ]
 
-        items_filtered = self.repo._apply_sort(
-            items, "name", "asc")  # pylint: disable=protected-access
+        items_filtered = self.repo._apply_sort(  # pylint: disable=protected-access
+            items, "name", "asc")
         self.assertListEqual(items_filtered, [items[2], items[1], items[0]])
 
-        items_filtered = self.repo._apply_sort(
-            items, "name", "desc")  # pylint: disable=protected-access
+        items_filtered = self.repo._apply_sort(  # pylint: disable=protected-access
+            items, "name", "desc")
         self.assertListEqual(items_filtered, [items[0], items[1], items[2]])
