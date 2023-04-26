@@ -1,4 +1,4 @@
-# pylint: disable=unexpected-keyword-arg
+
 import unittest
 from datetime import timedelta
 from django.utils import timezone
@@ -16,8 +16,8 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
         entity = Category(name='Movie')
         items = [entity]
 
-        # pylint: disable=protected-access
-        items_filtered = self.repo._apply_filter(items, None)
+        items_filtered = self.repo._apply_filter(  # pylint: disable=protected-access
+            items, None)
         self.assertListEqual(items_filtered, items)
 
     def test_filter(self):
@@ -26,8 +26,9 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             Category(name='TEST'),
             Category(name='fake'),
         ]
-        # pylint: disable=protected-access
-        items_filtered = self.repo._apply_filter(items, 'TEST')
+
+        items_filtered = self.repo._apply_filter(  # pylint: disable=protected-access
+            items, 'TEST')
         self.assertListEqual(items_filtered, [items[0], items[1]])
 
     def test_sort_by_created_at_when_sort_param_is_null(self):
@@ -38,8 +39,9 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             Category(name='fake', created_at=timezone.now() +
                      timedelta(seconds=200)),
         ]
-        # pylint: disable=protected-access
-        items_filtered = self.repo._apply_sort(items, None, None)
+
+        items_filtered = self.repo._apply_sort(  # pylint: disable=protected-access
+            items, None, None)
         self.assertListEqual(items_filtered, [items[2], items[1], items[0]])
 
     def test_sort_by_name(self):
@@ -49,10 +51,10 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             Category(name='abc'),
         ]
 
-        # pylint: disable=protected-access
-        items_filtered = self.repo._apply_sort(items, "name", "asc")
+        items_filtered = self.repo._apply_sort(  # pylint: disable=protected-access
+            items, "name", "asc")
         self.assertListEqual(items_filtered, [items[2], items[1], items[0]])
 
-        # pylint: disable=protected-access
-        items_filtered = self.repo._apply_sort(items, "name", "desc")
+        items_filtered = self.repo._apply_sort(  # pylint: disable=protected-access
+            items, "name", "desc")
         self.assertListEqual(items_filtered, [items[0], items[1], items[2]])

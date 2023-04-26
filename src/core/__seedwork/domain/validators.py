@@ -14,6 +14,7 @@ from core.__seedwork.domain.exceptions import ValidationException
 if not settings.configured:
     settings.configure(USE_I18N=False)
 
+
 @dataclass(frozen=True, slots=True)
 class ValidatorRules:
     value: Any
@@ -65,7 +66,7 @@ class ValidatorFieldsInterface(ABC, Generic[PropsValidated]):
         raise NotImplementedError()
 
 
-class DRFValidator(ValidatorFieldsInterface[PropsValidated], ABC):
+class DRFValidator(ValidatorFieldsInterface[PropsValidated], ABC):  # pylint: disable=abstract-method, too-few-public-methods
 
     def validate(self, data: Serializer) -> bool:
         serializer = data
@@ -87,11 +88,11 @@ class StrictCharField(CharField):
 
 
 class StrictBooleanField(BooleanField):
-    def to_internal_value(self, data):
+    def to_internal_value(self, data):  # pylint: disable=arguments-differ, inconsistent-return-statements
         with contextlib.suppress(TypeError):
             if data is True:
                 return True
-            if data is False:
+            if data is False:  # pylint: disable=no-else-return
                 return False
             elif data is None and self.allow_null:
                 return None

@@ -95,18 +95,18 @@ class SearchParams(Generic[Filter]):
         self.filter = None if self.filter == "" or self.filter is None \
             else str(self.filter)
 
-    def _convert_to_int(self, value: Any, default=0) -> int:  # pylint: disable=no-self-use
+    def _convert_to_int(self, value: Any, default=0) -> int:  # pylint: disable=useless-option-value
         try:
             return int(value)
         except (ValueError, TypeError):
             return default
 
-    def _get_dataclass_field(self, field_name):  # pylint: disable=no-self-use
+    def _get_dataclass_field(self, field_name):  # pylint: disable=useless-option-value
         return SearchParams.__dataclass_fields__[field_name]  # pylint: disable=no-member
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
-class SearchResult(Generic[ET, Filter]):  # pylint: disable=too-many-instance-attributes
+class SearchResult(Generic[ET, Filter]):  # pylint: disable=useless-object-inheritance, too-many-instance-attributes
     items: List[ET]
     total: int
     current_page: int
@@ -209,7 +209,7 @@ class InMemorySearchableRepository(
             return sorted(items, key=lambda item: getattr(item, sort), reverse=is_reverse)
         return items
 
-    def _apply_paginate(self, items: List[ET], page: int, per_page: int) -> List[ET]:  # pylint: disable=no-self-use
+    def _apply_paginate(self, items: List[ET], page: int, per_page: int) -> List[ET]:  # pylint: disable=useless-option-value
         start = (page - 1) * per_page
         limit = start + per_page
         return items[slice(start, limit)]
