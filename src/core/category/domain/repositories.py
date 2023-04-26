@@ -7,11 +7,11 @@ from core.__seedwork.domain.repositories import (
 from core.category.domain.entities import Category
 
 
-class _SearchParams(DesfaultSearchParams): # pylint: disable=too-few-public-methods
+class _SearchParams(DesfaultSearchParams):  # pylint: disable=too-few-public-methods
     pass
 
 
-class _SearchResult(DefaultSearchResult): # pylint: disable=too-few-public-methods
+class _SearchResult(DefaultSearchResult):  # pylint: disable=too-few-public-methods
     pass
 
 

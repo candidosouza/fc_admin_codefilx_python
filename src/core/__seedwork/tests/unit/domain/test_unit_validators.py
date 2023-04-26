@@ -26,7 +26,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
         for data in invalid_data:
             message = f'value: {data["value"]}, prop: {data["prop"]}'
             with self.assertRaises(ValidationException, msg=message) as assert_rules:
-                ValidatorRules.values( # pylint: disable=expression-not-assigned
+                ValidatorRules.values(  # pylint: disable=expression-not-assigned
                     data['value'], data['prop']
                 ).required()
             self.assertEqual(
@@ -56,7 +56,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
         for data in invalid_data:
             message = f'value: {data["value"]}, prop: {data["prop"]}'
             with self.assertRaises(ValidationException, msg=message) as assert_rules:
-                ValidatorRules.values( # pylint: disable=expression-not-assigned
+                ValidatorRules.values(  # pylint: disable=expression-not-assigned
                     data['value'], data['prop']
                 ).string()
             self.assertEqual(
@@ -84,7 +84,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
         for data in invalid_data:
             message = f'value: {data["value"]}, prop: {data["prop"]}'
             with self.assertRaises(ValidationException, msg=message) as assert_rules:
-                ValidatorRules.values( # pylint: disable=expression-not-assigned
+                ValidatorRules.values(  # pylint: disable=expression-not-assigned
                     data['value'], data['prop']
                 ).max_length(4)
             self.assertEqual(
@@ -112,7 +112,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
             message = f'value: {data["value"]}, prop: {data["prop"]}'
             with self.assertRaises(ValidationException, msg=message) as assert_rules:
 
-                ValidatorRules.values( # pylint: disable=expression-not-assigned
+                ValidatorRules.values(  # pylint: disable=expression-not-assigned
                     data['value'], data['prop']
                 ).min_length(3)
             self.assertEqual(
@@ -142,7 +142,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
         for data in invalid_data:
             message = f'value: {data["value"]}, prop: {data["prop"]}'
             with self.assertRaises(ValidationException, msg=message) as assert_rules:
-                ValidatorRules.values( # pylint: disable=expression-not-assigned
+                ValidatorRules.values(  # pylint: disable=expression-not-assigned
                     data['value'], data['prop']
                 ).boolean()
             self.assertEqual(
@@ -174,7 +174,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
         )
 
         with self.assertRaises(ValidationException) as assert_rules:
-            ValidatorRules.values( # pylint: disable=expression-not-assigned
+            ValidatorRules.values(  # pylint: disable=expression-not-assigned
                 5, 'prop'
             ).required().string().max_length(5)
         self.assertEqual(
@@ -183,7 +183,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
         )
 
         with self.assertRaises(ValidationException) as assert_rules:
-            ValidatorRules.values( # pylint: disable=expression-not-assigned
+            ValidatorRules.values(  # pylint: disable=expression-not-assigned
                 "x" * 6, 'prop'
             ).required().string().max_length(5)
         self.assertEqual(
@@ -230,7 +230,7 @@ class TestValidatorsRulesUnit(unittest.TestCase):
 class TestValidatorFieldsInsterfaceUnit(unittest.TestCase):
     def test_throw_error_when_validate_method_not_implemented(self):
         with self.assertRaises(TypeError) as assert_error:
-            ValidatorFieldsInterface() # pylint: disable=abstract-class-instantiated
+            ValidatorFieldsInterface()  # pylint: disable=abstract-class-instantiated
         self.assertEqual(
             assert_error.exception.args[0],
             "Can't instantiate abstract class ValidatorFieldsInterface " +
@@ -287,7 +287,7 @@ class TestDRFValidatorsUnit(unittest.TestCase):
 
 class TestStrictCharFieldUnit(unittest.TestCase):
     def test_if_is_valid_when_not_str_values(self):
-        class StubStrictCharFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
+        class StubStrictCharFieldSerializer(serializers.Serializer):  # pylint: disable=abstract-method
             name = StrictCharField()
 
         serializer = StubStrictCharFieldSerializer(data={'name': 7})
@@ -297,14 +297,14 @@ class TestStrictCharFieldUnit(unittest.TestCase):
         })
 
     def test_none_value_is_valid(self):
-        class StubStrictCharFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
+        class StubStrictCharFieldSerializer(serializers.Serializer):  # pylint: disable=abstract-method
             name = StrictCharField(required=True, allow_null=True)
 
         serializer = StubStrictCharFieldSerializer(data={'name': None})
         self.assertTrue(serializer.is_valid())
 
     def test_is_valid(self):
-        class StubStrictCharFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
+        class StubStrictCharFieldSerializer(serializers.Serializer):  # pylint: disable=abstract-method
             name = StrictCharField(required=True, allow_null=True)
 
         serializer = StubStrictCharFieldSerializer(data={'name': 'some value'})
@@ -314,7 +314,7 @@ class TestStrictCharFieldUnit(unittest.TestCase):
 
 class TestStrictBolleanFieldUnit(unittest.TestCase):
     def test_if_is_valid_when_not_str_values(self):
-        class StubStrictBolleanFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
+        class StubStrictBolleanFieldSerializer(serializers.Serializer):  # pylint: disable=abstract-method
             active = StrictBooleanField()
 
         message_error = 'Must be a valid boolean.'
@@ -344,7 +344,7 @@ class TestStrictBolleanFieldUnit(unittest.TestCase):
         })
 
     def test_is_valid(self):
-        class StubStrictBolleanFieldSerializer(serializers.Serializer): # pylint: disable=abstract-method
+        class StubStrictBolleanFieldSerializer(serializers.Serializer):  # pylint: disable=abstract-method
             active = StrictBooleanField()
 
         serializer = StubStrictBolleanFieldSerializer(data={'active': True})

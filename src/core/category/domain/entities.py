@@ -13,7 +13,7 @@ class Category(Entity):
     description: Optional[str] = None
     is_active: Optional[bool] = True
     created_at: Optional[datetime] = field(
-        default_factory=lambda: datetime.now()) # pylint: disable=unnecessary-lambda
+        default_factory=lambda: datetime.now())  # pylint: disable=unnecessary-lambda
 
     def __post_init__(self):
         if not self.created_at:

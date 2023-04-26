@@ -18,7 +18,7 @@ class ValueObject(ABC):
 
 @dataclass(frozen=True, slots=True)
 class UniqueEntityId(ValueObject):
-    id: str = field( # pylint: disable=invalid-name
+    id: str = field(  # pylint: disable=invalid-name
         default_factory=lambda: str(uuid.uuid4())
     )
 

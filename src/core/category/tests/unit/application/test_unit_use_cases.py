@@ -50,12 +50,12 @@ class TestCreateCategoryUseCaseUnit(unittest.TestCase):
             }
         )
 
-        description_field = CreateCategoryUseCase.Input.__dataclass_fields__[ # pylint: disable=no-member
+        description_field = CreateCategoryUseCase.Input.__dataclass_fields__[  # pylint: disable=no-member
             'description']
         self.assertEqual(description_field.default,
                          Category.get_fields('description').default)
 
-        is_active_field = CreateCategoryUseCase.Input.__dataclass_fields__[ # pylint: disable=no-member
+        is_active_field = CreateCategoryUseCase.Input.__dataclass_fields__[  # pylint: disable=no-member
             'is_active']
         self.assertEqual(is_active_field.default,
                          Category.get_fields('is_active').default)
@@ -348,6 +348,7 @@ class TestListCategoriesUseCase(unittest.TestCase):
             per_page=2,
             last_page=2
         ))
+
 
 class TestUpdateCategoryUseCase(unittest.TestCase):
 

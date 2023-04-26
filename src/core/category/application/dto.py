@@ -7,7 +7,7 @@ from core.category.domain.entities import Category
 
 @dataclass(frozen=True, slots=True)
 class CategoryOutput:
-    id: str # pylint: disable=invalid-name
+    id: str  # pylint: disable=invalid-name
     name: str
     description: Optional[str]
     is_active: Optional[bool]

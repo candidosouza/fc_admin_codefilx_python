@@ -4,7 +4,7 @@ from rest_framework import serializers
 from core.__seedwork.domain.validators import DRFValidator
 
 
-class StubSerializer(serializers.Serializer): # pylint: disable=abstract-method
+class StubSerializer(serializers.Serializer):  # pylint: disable=abstract-method
     name = serializers.CharField()
     price = serializers.CharField()
 

@@ -37,7 +37,7 @@ def main():
     # provider = MeterProvider(resource=resource, metric_readers=[reader])
     # metrics.set_meter_provider(provider)
     try:
-        from django.core.management import execute_from_command_line # pylint: disable=import-outside-toplevel
+        from django.core.management import execute_from_command_line  # pylint: disable=import-outside-toplevel
     except ImportError as exc:
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "
