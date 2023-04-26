@@ -1,12 +1,14 @@
 # pylint: disable=unexpected-keyword-arg
 
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from typing import Optional
+
 from core.category.application.dto import CategoryOutput, CategoryOutputMapper
 from core.category.domain.entities import Category
 from core.category.domain.repositories import CategoryRepository
 
 from core.__seedwork.application.use_cases import UseCase
+from core.__seedwork.application.dto import PaginationOutput, PaginationOutputMapper, SearchInput
 
 
 @dataclass(slots=True, frozen=True)
@@ -42,10 +44,10 @@ class CreateCategoryUseCase(UseCase):
 @dataclass(slots=True, frozen=True)
 class GetCategoryUseCase(UseCase):
 
-    category_repo: CategoryRepository
+    category_repository: CategoryRepository
 
     def execute(self, input_param: 'Input') -> 'Output':
-        category = self.category_repo.find_by_id(input_param.id)
+        category = self.category_repository.find_by_id(input_param.id)
         return self.__to_output(category)
 
     def __to_output(self, category: Category):  # pylint: disable=no-self-use
@@ -57,4 +59,34 @@ class GetCategoryUseCase(UseCase):
 
     @dataclass(slots=True, frozen=True)
     class Output(CategoryOutput):
+        pass
+
+
+@dataclass(slots=True, frozen=True)
+class ListCategoriesUseCase(UseCase):
+
+    category_repo: CategoryRepository
+
+    def execute(self, input_param: 'Input') -> 'Output':
+        search_params = self.category_repo.SearchParams(**asdict(input_param))
+        result = self.category_repo.search(search_params)
+        return self.__to_output(result)
+
+    def __to_output(self, result: CategoryRepository.SearchResult):  # pylint: disable=no-self-use
+        items = list(
+            map(CategoryOutputMapper.without_child().to_output, result.items)
+        )
+        return PaginationOutputMapper\
+            .from_child(ListCategoriesUseCase.Output)\
+            .to_output(
+                items,
+                result
+            )
+
+    @dataclass(slots=True, frozen=True)
+    class Input(SearchInput[str]):
+        pass
+
+    @dataclass(slots=True, frozen=True)
+    class Output(PaginationOutput[CategoryOutput]):
         pass
