@@ -1,21 +1,22 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
+# pylint: disable=unused-import
 import os
 import sys
 from opentelemetry.instrumentation.django import DjangoInstrumentor
 
 # from prometheus_client import start_http_server
 
-from opentelemetry import metrics
-from opentelemetry.exporter.prometheus import PrometheusMetricReader
-from opentelemetry.sdk.metrics import MeterProvider
-from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
+# from opentelemetry import metrics
+# from opentelemetry.exporter.prometheus import PrometheusMetricReader
+# from opentelemetry.sdk.metrics import MeterProvider
+# from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import (
-    ConsoleSpanExporter,
-    SimpleSpanProcessor,
-)
+# from opentelemetry.sdk.trace import TracerProvider
+# from opentelemetry.sdk.trace.export import (
+#     ConsoleSpanExporter,
+#     SimpleSpanProcessor,
+# )
 
 # Service name is required for most backends
 resource = Resource(attributes={
@@ -36,7 +37,7 @@ def main():
     # provider = MeterProvider(resource=resource, metric_readers=[reader])
     # metrics.set_meter_provider(provider)
     try:
-        from django.core.management import execute_from_command_line
+        from django.core.management import execute_from_command_line # pylint: disable=import-outside-toplevel
     except ImportError as exc:
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "

@@ -18,7 +18,7 @@ class ValueObject(ABC):
 
 @dataclass(frozen=True, slots=True)
 class UniqueEntityId(ValueObject):
-    id: str = field(
+    id: str = field( # pylint: disable=invalid-name
         default_factory=lambda: str(uuid.uuid4())
     )
 
@@ -33,5 +33,5 @@ class UniqueEntityId(ValueObject):
     def __validate(self):
         try:
             uuid.UUID(self.id)
-        except ValueError as e:
-            raise InvalidUuidException() from e
+        except ValueError as ex:
+            raise InvalidUuidException() from ex
