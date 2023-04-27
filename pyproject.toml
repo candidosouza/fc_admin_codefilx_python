@@ -31,6 +31,8 @@ dev = [
     "pytest-cov>=4.0.0",
 ]
 [tool.pdm.scripts]
+manage="python ./src/django_app/manage.py"
+runserver = "pdm run manage runserver 0.0.0.0:8000"
 pep8 = "autopep8 --in-place --recursive ./src"
 pylint = "pylint ./src"
 test = "pytest --ignore __pypackages__"

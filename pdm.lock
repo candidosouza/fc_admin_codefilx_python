@@ -453,7 +453,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 [metadata]
 lock_version = "4.2"
 groups = ["default", "dev"]
-content_hash = "sha256:f285567bd58763bfb0d074e75628b4ac36d6176cfeb83c0a9c5c8a8dba99b4b3"
+content_hash = "sha256:105322b64a656607dbc596da8e984efe1a7919f9c04cb56e38ba789d2a1ee46f"
 
 [metadata.files]
 "asgiref 3.6.0" = [

@@ -4,7 +4,6 @@ services:
     app:
       build: .
       container_name: app
-      # entrypoint: ./.docker/entrypoint.sh
       command: ./.docker/start-app.sh
       tty: true
       volumes:

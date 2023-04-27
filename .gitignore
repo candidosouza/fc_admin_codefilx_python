@@ -16,3 +16,4 @@ tmp/
 elasticsearch_data/
 # .docker/.grafana/config/
 .docker/.grafana/grafana_data/
+db.sqlite3
