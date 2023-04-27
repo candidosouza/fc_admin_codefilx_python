@@ -4,6 +4,7 @@ from typing import Callable
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.views import APIView
+from rest_framework import status
 
 from core.category.application.use_cases import (
     CreateCategoryUseCase,
@@ -18,12 +19,12 @@ class CategoryResource(APIView):
     list_use_case: Callable[[], ListCategoriesUseCase]
 
     def post(self, request: Request):
-        input_param = CreateCategoryUseCase.Input(request.data['name'])
+        input_param = CreateCategoryUseCase.Input(**request.data)
         output = self.create_use_case().execute(input_param)
-        return Response(asdict(output))
+        return Response(asdict(output), status=status.HTTP_201_CREATED)
 
     def get(self, request: Request):
         input_param = ListCategoriesUseCase.Input(
             **request.query_params.dict())
         output = self.list_use_case().execute(input_param)
-        return Response(asdict(output))
+        return Response(asdict(output), status=status.HTTP_200_OK)
