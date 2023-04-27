@@ -108,6 +108,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "django-extensions"
+version = "3.2.1"
+requires_python = ">=3.6"
+summary = "Extensions for Django"
+dependencies = [
+    "Django>=3.2",
+]
+
+[[package]]
 name = "django-prometheus"
 version = "2.2.0"
 summary = "Django middlewares to monitor your application with Prometheus.io."
@@ -453,7 +462,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 [metadata]
 lock_version = "4.2"
 groups = ["default", "dev"]
-content_hash = "sha256:105322b64a656607dbc596da8e984efe1a7919f9c04cb56e38ba789d2a1ee46f"
+content_hash = "sha256:b99dd0d55500d8351bf335b7200b4c3aa00a0ac710549c1079df200d266823a6"
 
 [metadata.files]
 "asgiref 3.6.0" = [
@@ -629,6 +638,10 @@ content_hash = "sha256:105322b64a656607dbc596da8e984efe1a7919f9c04cb56e38ba789d2
 "django 4.2" = [
     {url = "https://files.pythonhosted.org/packages/9a/bb/48aa3e0850923096dff2766d21a6004d6e1a3317f0bd400ba81f586754e1/Django-4.2.tar.gz", hash = "sha256:c36e2ab12824e2ac36afa8b2515a70c53c7742f0d6eaefa7311ec379558db997"},
     {url = "https://files.pythonhosted.org/packages/d9/40/6012f98b14b64b4d3dc47b0c2f116fccbd0795ab35515d0c40dac73b81b8/Django-4.2-py3-none-any.whl", hash = "sha256:ad33ed68db9398f5dfb33282704925bce044bef4261cd4fb59e4e7f9ae505a78"},
+]
+"django-extensions 3.2.1" = [
+    {url = "https://files.pythonhosted.org/packages/00/a8/36d25c69589a44680e49f8b1886f65379829af4464384bd10a205c93532a/django_extensions-3.2.1-py3-none-any.whl", hash = "sha256:421464be390289513f86cb5e18eb43e5dc1de8b4c27ba9faa3b91261b0d67e09"},
+    {url = "https://files.pythonhosted.org/packages/43/aa/94ea07a87d52f484a562e701ee7af8dee4a43f3260b10d500d178ecbfcc7/django-extensions-3.2.1.tar.gz", hash = "sha256:2a4f4d757be2563cd1ff7cfdf2e57468f5f931cc88b23cf82ca75717aae504a4"},
 ]
 "django-prometheus 2.2.0" = [
     {url = "https://files.pythonhosted.org/packages/63/12/5325fe5524938eae3beab9e49b48c50676bd20aace4f68daf978215d62d8/django-prometheus-2.2.0.tar.gz", hash = "sha256:240378a1307c408bd5fc85614a3a57f1ce633d4a222c9e291e2bbf325173b801"},

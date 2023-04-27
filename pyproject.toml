@@ -16,6 +16,7 @@ dependencies = [
     "opentelemetry-instrumentation-django>=0.38b0",
     "requests>=2.28.2",
     "opentelemetry-exporter-prometheus>=1.12.0rc1",
+    "django-extensions>=3.2.1",
 ]
 
 requires-python = ">=3.10.2"

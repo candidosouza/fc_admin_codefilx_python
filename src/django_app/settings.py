@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # elasticapm
     'elasticapm.contrib.django',
     'django_prometheus',
+    'django_extensions',
     'core.category.infra.django'
 ]
 
