@@ -26,6 +26,7 @@ Com DDD e Clean Architecture
 * Pylint
 * pytest
 * pytest-cov
+* Dependency Injector
 * Django
 * DRF (Django Rest Framework)
 * Git
