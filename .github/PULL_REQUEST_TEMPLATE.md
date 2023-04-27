@@ -17,8 +17,9 @@ Fixes # (issue)
 
 Descreva os testes que você executou para verificar suas alterações. Forneça instruções para que possamos reproduzir. Liste também todos os detalhes relevantes para sua configuração de teste
 
-- [ ] Test A
-- [ ] Test B
+- [ ] Testes Unitários
+- [ ] Testes de Integração
+- [ ] Testes e2e
 
 > ## Checklist:
 
