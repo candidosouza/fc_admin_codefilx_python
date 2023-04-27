@@ -63,11 +63,12 @@ class GetCategoryUseCase(UseCase):
 @dataclass(slots=True, frozen=True)
 class ListCategoriesUseCase(UseCase):
 
-    category_repo: CategoryRepository
+    category_repository: CategoryRepository
 
     def execute(self, input_param: 'Input') -> 'Output':
-        search_params = self.category_repo.SearchParams(**asdict(input_param))
-        result = self.category_repo.search(search_params)
+        search_params = self.category_repository.SearchParams(
+            **asdict(input_param))
+        result = self.category_repository.search(search_params)
         return self.__to_output(result)
 
     def __to_output(self, result: CategoryRepository.SearchResult):  # pylint: disable=useless-option-value
@@ -93,10 +94,10 @@ class ListCategoriesUseCase(UseCase):
 @dataclass(slots=True, frozen=True)
 class UpdateCategoryUseCase(UseCase):
 
-    category_repo: CategoryRepository
+    category_repository: CategoryRepository
 
     def execute(self, input_param: 'Input') -> 'Output':  # Arquitetura Hexagonal
-        entity = self.category_repo.find_by_id(input_param.id)
+        entity = self.category_repository.find_by_id(input_param.id)
         entity.update(input_param.name, input_param.description)
 
         if input_param.is_active is True:
@@ -105,7 +106,7 @@ class UpdateCategoryUseCase(UseCase):
         if input_param.is_active is False:
             entity.deactivate()
 
-        self.category_repo.update(entity)
+        self.category_repository.update(entity)
         return self.__to_output(entity)
 
     def __to_output(self, category: Category) -> 'Output':  # pylint: disable=useless-option-value
@@ -129,10 +130,10 @@ class UpdateCategoryUseCase(UseCase):
 @dataclass(slots=True, frozen=True)
 class DeleteCategoryUseCase(UseCase):
 
-    category_repo: CategoryRepository
+    category_repository: CategoryRepository
 
     def execute(self, input_param: 'Input') -> None:
-        self.category_repo.delete(input_param.id)
+        self.category_repository.delete(input_param.id)
 
     @dataclass(slots=True, frozen=True)
     class Input:
