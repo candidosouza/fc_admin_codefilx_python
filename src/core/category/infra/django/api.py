@@ -23,6 +23,7 @@ class CategoryResource(APIView):
         return Response(asdict(output))
 
     def get(self, request: Request):
-        input_param = ListCategoriesUseCase.Input(**request.query_params.dict())
+        input_param = ListCategoriesUseCase.Input(
+            **request.query_params.dict())
         output = self.list_use_case().execute(input_param)
         return Response(asdict(output))

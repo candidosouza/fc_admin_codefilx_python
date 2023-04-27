@@ -66,7 +66,8 @@ class ListCategoriesUseCase(UseCase):
     category_repository: CategoryRepository
 
     def execute(self, input_param: 'Input') -> 'Output':
-        search_params = self.category_repository.SearchParams(**asdict(input_param))
+        search_params = self.category_repository.SearchParams(
+            **asdict(input_param))
         result = self.category_repository.search(search_params)
         return self.__to_output(result)
 
