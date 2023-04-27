@@ -3,7 +3,7 @@ import unittest
 from datetime import timedelta
 from django.utils import timezone
 from core.category.domain.entities import Category
-from core.category.infra.repositories import CategoryInMemoryRepository
+from core.category.infra.in_memory.repositories import CategoryInMemoryRepository
 
 
 class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):

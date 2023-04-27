@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+# DDD / mudar a raiz do projeto com o BASE_DIR, adicionar mais um .parent
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # apps de terceiros
     # elasticapm
     'elasticapm.contrib.django',
     'django_prometheus',
+    'django_extensions',
+    # meus apps
+    'core.category.infra.django'
 ]
 
 MIDDLEWARE = [
