@@ -25,7 +25,7 @@ class CategoryResource(APIView):
         output = self.create_use_case().execute(input_param)
         return Response(asdict(output), status=status.HTTP_201_CREATED)
 
-    def get(self, request: Request, id = None): # pylint: disable=invalid-name, redefined-builtin
+    def get(self, request: Request, id=None):  # pylint: disable=invalid-name, redefined-builtin
         if id:
             return self.get_object(id)
         input_param = ListCategoriesUseCase.Input(
@@ -33,7 +33,7 @@ class CategoryResource(APIView):
         output = self.list_use_case().execute(input_param)
         return Response(asdict(output), status=status.HTTP_200_OK)
 
-    def get_object(self, id: str): # pylint: disable=invalid-name, redefined-builtin
+    def get_object(self, id: str):  # pylint: disable=invalid-name, redefined-builtin
         input_param = GetCategoryUseCase.Input(id)
         output = self.get_use_case().execute(input_param)
         return Response(asdict(output), status=status.HTTP_200_OK)
