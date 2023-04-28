@@ -7,6 +7,7 @@ from rest_framework.request import Request
 
 from core.category.application.use_cases import (
     CreateCategoryUseCase,
+    GetCategoryUseCase,
     ListCategoriesUseCase
 )
 from core.category.application.dto import CategoryOutput
@@ -104,8 +105,48 @@ class TestCategoryResourceUnit(unittest.TestCase):
             'last_page': 1,
         })
 
+    def test_if_get_invoke_get_object(self):
+        resource = CategoryResource(**self.__init_all_none())
+        resource.get_object = mock.Mock()
+        resource.get(None, 'af46842e-027d-4c91-b259-3a3642144ba4')
+        resource.get_object.assert_called_with('af46842e-027d-4c91-b259-3a3642144ba4')
+
+        # outra forma de fazer o mock
+        mock_list_use_case = mock.Mock(ListCategoriesUseCase)
+        mock_get_use_case = mock.Mock(GetCategoryUseCase)
+
+        mock_get_use_case.execute.return_value = GetCategoryUseCase.Output(
+            id='af46842e-027d-4c91-b259-3a3642144ba4',
+            name='Movie',
+            description=None,
+            is_active=True,
+            created_at=datetime.now()
+        )
+
+        resource = CategoryResource(
+            ** {
+                **self.__init_all_none(),
+                'list_use_case': lambda: mock_list_use_case,
+                'get_use_case': lambda: mock_get_use_case
+            }
+        )
+        response = resource.get(None, 'af46842e-027d-4c91-b259-3a3642144ba4')
+        self.assertEqual(mock_list_use_case.call_count, 0)
+        mock_get_use_case.execute.assert_called_with(GetCategoryUseCase.Input(
+            id='af46842e-027d-4c91-b259-3a3642144ba4'
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {
+            'id': 'af46842e-027d-4c91-b259-3a3642144ba4',
+            'name': 'Movie',
+            'description': None,
+            'is_active': True,
+            'created_at': mock_get_use_case.execute.return_value.created_at
+        })
+
     def __init_all_none(self):
         return {
             'list_use_case': None,
             'create_use_case': None,
+            'get_use_case': None,
         }
