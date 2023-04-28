@@ -1,4 +1,8 @@
+
 GET http://localhost:8000/categories/
+
+###
+GET http://localhost:8000/categories/<uuid>
 
 ###
 POST http://localhost:8000/categories/

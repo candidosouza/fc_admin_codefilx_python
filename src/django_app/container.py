@@ -3,6 +3,7 @@ from dependency_injector import containers, providers
 from core.category.infra.in_memory.repositories import CategoryInMemoryRepository
 from core.category.application.use_cases import (
     CreateCategoryUseCase,
+    GetCategoryUseCase,
     ListCategoriesUseCase
 )
 
@@ -19,5 +20,10 @@ class Container(containers.DeclarativeContainer):  # pylint: disable=too-few-pub
 
     use_case_category_list_categories = providers.Singleton(  # pylint: disable=c-extension-no-member
         ListCategoriesUseCase,
+        category_repository=repository_category_in_memory
+    )
+
+    use_case_category_get_category = providers.Singleton(  # pylint: disable=c-extension-no-member
+        GetCategoryUseCase,
         category_repository=repository_category_in_memory
     )

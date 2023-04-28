@@ -8,6 +8,7 @@ from rest_framework import status
 
 from core.category.application.use_cases import (
     CreateCategoryUseCase,
+    GetCategoryUseCase,
     ListCategoriesUseCase
 )
 
@@ -17,14 +18,22 @@ class CategoryResource(APIView):
 
     create_use_case: Callable[[], CreateCategoryUseCase]
     list_use_case: Callable[[], ListCategoriesUseCase]
+    get_use_case: Callable[[], ListCategoriesUseCase]
 
     def post(self, request: Request):
         input_param = CreateCategoryUseCase.Input(**request.data)
         output = self.create_use_case().execute(input_param)
         return Response(asdict(output), status=status.HTTP_201_CREATED)
 
-    def get(self, request: Request):
+    def get(self, request: Request, id = None): # pylint: disable=invalid-name, redefined-builtin
+        if id:
+            return self.get_object(id)
         input_param = ListCategoriesUseCase.Input(
             **request.query_params.dict())
         output = self.list_use_case().execute(input_param)
+        return Response(asdict(output), status=status.HTTP_200_OK)
+
+    def get_object(self, id: str): # pylint: disable=invalid-name, redefined-builtin
+        input_param = GetCategoryUseCase.Input(id)
+        output = self.get_use_case().execute(input_param)
         return Response(asdict(output), status=status.HTTP_200_OK)
