@@ -8,7 +8,9 @@ from rest_framework.request import Request
 from core.category.application.use_cases import (
     CreateCategoryUseCase,
     GetCategoryUseCase,
-    ListCategoriesUseCase
+    ListCategoriesUseCase,
+    UpdateCategoryUseCase,
+    DeleteCategoryUseCase
 )
 from core.category.application.dto import CategoryOutput
 from core.category.infra.django.api import CategoryResource
@@ -143,6 +145,74 @@ class TestCategoryResourceUnit(unittest.TestCase):
             'is_active': True,
             'created_at': mock_get_use_case.execute.return_value.created_at
         })
+
+    def test_put_method(self):
+        send_data = {
+            'id': 'af46842e-027d-4c91-b259-3a3642144ba4',
+            'name': 'Movie'
+        }
+        mock_update_use_case = mock.Mock(UpdateCategoryUseCase)
+
+        mock_update_use_case.execute.return_value = UpdateCategoryUseCase.Output(
+            id=send_data['id'],
+            name=send_data['name'],
+            description=None,
+            is_active=True,
+            created_at=datetime.now()
+        )
+
+        resource = CategoryResource(
+            ** {
+                **self.__init_all_none(),
+                'update_use_case': lambda: mock_update_use_case
+            }
+        )
+        from rest_framework.test import APIRequestFactory
+        _request = APIRequestFactory().put('/categories/', send_data)
+        request = Request(_request)
+        request._full_data = send_data  # pylint: disable=protected-access
+        response = resource.put(
+            request, send_data['id'])
+        mock_update_use_case.execute.assert_called_with(UpdateCategoryUseCase.Input(
+            id=send_data['id'],
+            name=send_data['name']
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {
+            'id': send_data['id'],
+            'name': send_data['name'],
+            'description': None,
+            'is_active': True,
+            'created_at': mock_update_use_case.execute.return_value.created_at
+        })
+
+
+    def test_delete_method(self):
+        mock_delete_use_case = mock.Mock(DeleteCategoryUseCase)
+
+        resource = CategoryResource(
+            ** {
+                **self.__init_all_none(),
+                'delete_use_case': lambda: mock_delete_use_case
+            }
+        )
+        _request = APIRequestFactory().delete('/')
+        request = Request(_request)
+        response = resource.delete(
+            request, 'af46842e-027d-4c91-b259-3a3642144ba4')
+        mock_delete_use_case.execute.assert_called_with(DeleteCategoryUseCase.Input(
+            id='af46842e-027d-4c91-b259-3a3642144ba4'
+        ))
+        self.assertEqual(response.status_code, 204)
+
+    def __init_all_none(self):
+        return {
+            'list_use_case': None,
+            'create_use_case': None,
+            'get_use_case': None,
+            'update_use_case': None,
+            'delete_use_case': None,
+        }
 
     def __init_all_none(self):
         return {
