@@ -5,7 +5,8 @@ from core.category.application.use_cases import (
     CreateCategoryUseCase,
     GetCategoryUseCase,
     ListCategoriesUseCase,
-    UpdateCategoryUseCase
+    UpdateCategoryUseCase,
+    DeleteCategoryUseCase,
 )
 
 
@@ -31,5 +32,10 @@ class Container(containers.DeclarativeContainer):  # pylint: disable=too-few-pub
 
     use_case_category_update_category = providers.Singleton(  # pylint: disable=c-extension-no-member
         UpdateCategoryUseCase,
+        category_repository=repository_category_in_memory
+    )
+
+    use_case_category_delete_category = providers.Singleton(  # pylint: disable=c-extension-no-member
+        DeleteCategoryUseCase,
         category_repository=repository_category_in_memory
     )
