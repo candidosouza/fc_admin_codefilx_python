@@ -1,4 +1,8 @@
+
 GET http://localhost:8000/categories/
+
+###
+GET http://localhost:8000/categories/<uuid>/
 
 ###
 POST http://localhost:8000/categories/
@@ -7,6 +11,18 @@ Content-Type: application/json
 {
     "name": "Movie"
 }
+
+###
+PUT http://localhost:8000/categories/<uuid>/
+Content-Type: application/json
+
+{
+    "name": "Movie Teste"
+}
+
+###
+DELETE http://localhost:8000/categories/<uuid>/
+Content-Type: application/json
 
 ###
 GET http://localhost:8000/metrics
