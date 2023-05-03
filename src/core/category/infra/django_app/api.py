@@ -43,13 +43,10 @@ class CategoryResource(APIView):
         output = self.get_use_case().execute(input_param)
         return Response(asdict(output), status=status.HTTP_200_OK)
 
-    def put(self, request: Request, id=None):  # pylint: disable=invalid-name, redefined-builtin
-        input_param = UpdateCategoryUseCase.Input(
-            id=id,
-            **request.data
-        )
+    def put(self, request: Request, id: str): # pylint: disable=redefined-builtin,invalid-name
+        input_param = UpdateCategoryUseCase.Input(**{'id': id, **request.data})
         output = self.update_use_case().execute(input_param)
-        return Response(asdict(output), status=status.HTTP_200_OK)
+        return Response(asdict(output))
 
     def delete(self, request: Request, id=None):  # pylint: disable=invalid-name, redefined-builtin, unused-argument
         input_param = DeleteCategoryUseCase.Input(id=id)
