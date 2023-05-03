@@ -13,7 +13,7 @@
 #     DeleteCategoryUseCase
 # )
 # from core.category.application.dto import CategoryOutput
-# from core.category.infra.django.api import CategoryResource
+# from core.category.infra.django_app.api import CategoryResource
 
 
 # class TestCategoryResourceUnit(unittest.TestCase):
