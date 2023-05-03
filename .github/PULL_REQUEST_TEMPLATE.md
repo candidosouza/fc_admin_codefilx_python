@@ -4,8 +4,6 @@
 
 Inclua um resumo da alteração e qual problema foi corrigido. Inclua também motivação e contexto relevantes. Liste todas as dependências necessárias para essa alteração.
 
-Fixes # (issue)
-
 > ## Tipo de mudança
 
 - [ ] Correção de bug (alteração ininterrupta que corrige um problema)
