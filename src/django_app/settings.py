@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django_prometheus',
     'django_extensions',
     # meus apps
-    'core.category.infra.django'
+    'core.category.infra.django_app',
 ]
 
 MIDDLEWARE = [
