@@ -160,7 +160,8 @@ PROMETHEUS_LATENCY_BUCKETS = (0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5,
 PROMETHEUS_LATENCY_BUCKETS = (.1, .2, .5, .6, .8, 1.0, 2.0, 3.0,
                               4.0, 5.0, 6.0, 7.5, 9.0, 12.0, 15.0, 20.0, 30.0, float("inf"))
 # prometheus "/prometheus/metrics"
-# ROOT_URLCONF = "django_app.urls_prometheus_wrapper"
+ROOT_URLCONF = "django_app.urls_prometheus_wrapper"
+# ROOT_URLCONF = "django_app.urls"
 
 LOGGING = {
     'version': 1,
