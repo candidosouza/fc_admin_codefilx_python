@@ -11,6 +11,7 @@ class CategoryModel(models.Model):
         db_table = 'categories'
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
+        app_label = 'category'
 
     def __str__(self):
         return f'{self.name}'
