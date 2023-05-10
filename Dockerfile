@@ -12,7 +12,7 @@ USER python
 
 WORKDIR /home/python/app
 
-ENV MY_PYTHON_PACKAGES=/home/python/app/__pypackages__/3.10
+ENV MY_PYTHON_PACKAGES=/home/python/app/__pypackages__/3.11
 ENV PYTHONPATH=${PYTHONPATH}/home/python/app/src
 ENV PATH $PATH:${MY_PYTHON_PACKAGES}/bin
 

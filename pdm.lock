@@ -14,8 +14,6 @@ requires_python = ">=3.7.2"
 summary = "An abstract syntax tree for Python with inference support."
 dependencies = [
     "lazy-object-proxy>=1.4.0",
-    "typing-extensions>=4.0.0; python_version < \"3.11\"",
-    "wrapt<2,>=1.11; python_version < \"3.11\"",
     "wrapt<2,>=1.14; python_version >= \"3.11\"",
 ]
 
@@ -26,7 +24,6 @@ requires_python = ">=3.6"
 summary = "A tool that automatically formats Python code to conform to the PEP 8 style guide"
 dependencies = [
     "pycodestyle>=2.10.0",
-    "tomli; python_version < \"3.11\"",
 ]
 
 [[package]]
@@ -73,7 +70,6 @@ requires_python = ">=3.7"
 summary = "Code coverage measurement for Python"
 dependencies = [
     "coverage==7.2.5",
-    "tomli; python_full_version <= \"3.11.0a6\"",
 ]
 
 [[package]]
@@ -161,12 +157,6 @@ dependencies = [
     "urllib3",
     "wrapt>=1.14.1",
 ]
-
-[[package]]
-name = "exceptiongroup"
-version = "1.1.1"
-requires_python = ">=3.7"
-summary = "Backport of PEP 654 (exception groups)"
 
 [[package]]
 name = "faker"
@@ -351,12 +341,10 @@ summary = "python code static checker"
 dependencies = [
     "astroid<=2.17.0-dev0,>=2.15.4",
     "colorama>=0.4.5; sys_platform == \"win32\"",
-    "dill>=0.2; python_version < \"3.11\"",
     "dill>=0.3.6; python_version >= \"3.11\"",
     "isort<6,>=4.2.5",
     "mccabe<0.8,>=0.6",
     "platformdirs>=2.2.0",
-    "tomli>=1.1.0; python_version < \"3.11\"",
     "tomlkit>=0.10.1",
 ]
 
@@ -367,7 +355,6 @@ requires_python = ">=3.7"
 summary = "API to interact with the python pyproject.toml based projects"
 dependencies = [
     "packaging>=23",
-    "tomli>=2.0.1; python_version < \"3.11\"",
 ]
 
 [[package]]
@@ -377,11 +364,9 @@ requires_python = ">=3.7"
 summary = "pytest: simple powerful testing with Python"
 dependencies = [
     "colorama; sys_platform == \"win32\"",
-    "exceptiongroup>=1.0.0rc8; python_version < \"3.11\"",
     "iniconfig",
     "packaging",
     "pluggy<2.0,>=0.12",
-    "tomli>=1.0.0; python_version < \"3.11\"",
 ]
 
 [[package]]
@@ -448,12 +433,6 @@ requires_python = ">=3.5"
 summary = "A non-validating SQL parser."
 
 [[package]]
-name = "tomli"
-version = "2.0.1"
-requires_python = ">=3.7"
-summary = "A lil' TOML parser"
-
-[[package]]
 name = "tomlkit"
 version = "0.11.8"
 requires_python = ">=3.7"
@@ -473,7 +452,6 @@ dependencies = [
     "platformdirs>=3.2",
     "pluggy>=1",
     "pyproject-api>=1.5.1",
-    "tomli>=2.0.1; python_version < \"3.11\"",
     "virtualenv>=20.21",
 ]
 
@@ -520,8 +498,9 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.2"
+cross_platform = true
 groups = ["default", "dev"]
-content_hash = "sha256:1be0fd964cd7b5c8d9e1de17885b598e49db9c3d377b70140242132f33f6f6a6"
+content_hash = "sha256:5d29f0021a5e46294b1f1a4d701e843a9cd78dd263abc4c394b09de4f4927fa5"
 
 [metadata.files]
 "asgiref 3.6.0" = [
@@ -790,10 +769,6 @@ content_hash = "sha256:1be0fd964cd7b5c8d9e1de17885b598e49db9c3d377b70140242132f3
     {url = "https://files.pythonhosted.org/packages/36/48/b34ab57b6f503791b6e51f2e1c50f7f3012cfe58c48ec1c25dab63be6025/elastic_apm-6.15.1-py2.py3-none-any.whl", hash = "sha256:b704ff61ae985611b1b9846a4cc0ab88bf119c66dad6985ae169c68284aac19c"},
     {url = "https://files.pythonhosted.org/packages/55/91/006dd51577dd8b0a84730d1116d862e0c8bc9c0681772f17baa0351a1827/elastic-apm-6.15.1.tar.gz", hash = "sha256:9bc8ec3bd5ef0a108cdb2250dcb70b700ef09f48f97f494e02becd4c7531a245"},
 ]
-"exceptiongroup 1.1.1" = [
-    {url = "https://files.pythonhosted.org/packages/61/97/17ed81b7a8d24d8f69b62c0db37abbd8c0042d4b3fc429c73dab986e7483/exceptiongroup-1.1.1-py3-none-any.whl", hash = "sha256:232c37c63e4f682982c8b6459f33a8981039e5fb8756b2074364e5055c498c9e"},
-    {url = "https://files.pythonhosted.org/packages/cc/38/57f14ddc8e8baeddd8993a36fe57ce7b4ba174c35048b9a6d270bb01e833/exceptiongroup-1.1.1.tar.gz", hash = "sha256:d484c3090ba2889ae2928419117447a14daf3c1231d5e30d0aae34f354f01785"},
-]
 "faker 18.7.0" = [
     {url = "https://files.pythonhosted.org/packages/03/6d/6540ca19e93c00c065f075811d3a261cbfddecbfdb0fba87bacff2446d4f/Faker-18.7.0.tar.gz", hash = "sha256:f02c6d3fdb5bc781f80b440cf2bdec336ed47ecfb8d620b20c3d4188ed051831"},
     {url = "https://files.pythonhosted.org/packages/94/77/1d278bc2f11bfffc6a170ae86abe0cb8612f3352e626aae9a8d4ab268203/Faker-18.7.0-py3-none-any.whl", hash = "sha256:38dbc3b80e655d7301e190426ab30f04b6b7f6ca4764c5dd02772ffde0fa6dcd"},
@@ -959,10 +934,6 @@ content_hash = "sha256:1be0fd964cd7b5c8d9e1de17885b598e49db9c3d377b70140242132f3
 "sqlparse 0.4.4" = [
     {url = "https://files.pythonhosted.org/packages/65/16/10f170ec641ed852611b6c9441b23d10b5702ab5288371feab3d36de2574/sqlparse-0.4.4.tar.gz", hash = "sha256:d446183e84b8349fa3061f0fe7f06ca94ba65b426946ffebe6e3e8295332420c"},
     {url = "https://files.pythonhosted.org/packages/98/5a/66d7c9305baa9f11857f247d4ba761402cea75db6058ff850ed7128957b7/sqlparse-0.4.4-py3-none-any.whl", hash = "sha256:5430a4fe2ac7d0f93e66f1efc6e1338a41884b7ddf2a350cedd20ccc4d9d28f3"},
-]
-"tomli 2.0.1" = [
-    {url = "https://files.pythonhosted.org/packages/97/75/10a9ebee3fd790d20926a90a2547f0bf78f371b2f13aa822c759680ca7b9/tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
-    {url = "https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
 ]
 "tomlkit 0.11.8" = [
     {url = "https://files.pythonhosted.org/packages/10/37/dd53019ccb72ef7d73fff0bee9e20b16faff9658b47913a35d79e89978af/tomlkit-0.11.8.tar.gz", hash = "sha256:9330fc7faa1db67b541b28e62018c17d20be733177d290a13b24c62d1614e0c3"},
