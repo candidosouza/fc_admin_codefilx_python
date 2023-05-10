@@ -27,7 +27,7 @@ jobs:
         run: pdm install
 
       - name: Run pdm with tests
-        run: pdm run pytest
+        run: pdm run test
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
