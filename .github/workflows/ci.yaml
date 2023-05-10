@@ -20,11 +20,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           
-      - name: Install tox and any other packages
-        run: pip install tox
+      - name: Install pdm and any other packages
+        run: pip install pdm
 
-      - name: Run tox with tests
-        run: tox -e py
+      - name: Install pdm and any other packages
+        run: pdm install
+
+      - name: Run pdm with tests
+        run: pdm run pytest
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
