@@ -228,32 +228,32 @@ class TestListCategoriesUseCase(unittest.TestCase):
                 result
             ))
 
-    # def test_execute_using_empty_search_params(self):
-    #     self.category_repo.items = [
-    #         Category(name='test 1'),
-    #         Category(name='test 2', created_at=timezone.now() +
-    #                  timedelta(seconds=200)),
-    #     ]
-    #     with patch.object(
-    #         self.category_repo,
-    #         'search',
-    #         wraps=self.category_repo.search
-    #     ) as spy_search:
-    #         input_param = ListCategoriesUseCase.Input()
-    #         output = self.use_case.execute(input_param)
-    #         spy_search.assert_called_once()
-    #         self.assertEqual(output, ListCategoriesUseCase.Output(
-    #             items=list(
-    #                 map(
-    #                     CategoryOutputMapper.without_child().to_output,
-    #                     self.category_repo.items[::-1]
-    #                 )
-    #             ),
-    #             total=2,
-    #             current_page=1,
-    #             per_page=15,
-    #             last_page=1
-    #         ))
+    def test_execute_using_empty_search_params(self):
+        self.category_repo.items = [
+            Category(name='test 1'),
+            Category(name='test 2', created_at=timezone.now() +
+                     timedelta(seconds=200)),
+        ]
+        with patch.object(
+            self.category_repo,
+            'search',
+            wraps=self.category_repo.search
+        ) as spy_search:
+            input_param = ListCategoriesUseCase.Input()
+            output = self.use_case.execute(input_param)
+            spy_search.assert_called_once()
+            self.assertEqual(output, ListCategoriesUseCase.Output(
+                items=list(
+                    map(
+                        CategoryOutputMapper.without_child().to_output,
+                        self.category_repo.items[::-1]
+                    )
+                ),
+                total=2,
+                current_page=1,
+                per_page=15,
+                last_page=1
+            ))
 
     def test_execute_using_pagination_and_sort_and_filter(self):
         items = [

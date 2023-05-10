@@ -161,11 +161,11 @@ class TestListCategoriesUseCaseInt(unittest.TestCase):
 
     def test_execute_using_pagination_and_sort_and_filter(self):
         models = [
-            baker.make(CategoryModel, name='a'),
+            baker.make(CategoryModel, name='abc'),
             baker.make(CategoryModel, name='AAA'),
             baker.make(CategoryModel, name='AaA'),
-            baker.make(CategoryModel, name='b'),
-            baker.make(CategoryModel, name='c'),
+            baker.make(CategoryModel, name='bcd'),
+            baker.make(CategoryModel, name='cde'),
         ]
 
         input_param = ListCategoriesUseCase.Input(

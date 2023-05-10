@@ -2,8 +2,6 @@
 import datetime
 import unittest
 import pytest
-import django
-django.setup()
 from model_bakery import baker
 from model_bakery.recipe import seq
 from core.category.domain.repositories import CategoryRepository
@@ -231,27 +229,27 @@ class TestCategoryDjangoRepositoryInt(unittest.TestCase):
         models = CategoryModel.objects.bulk_create([
             CategoryModel(
                 id=UniqueEntityId().id,
-                name='b',
+                name='bcd',
                 **default_props
             ),
             CategoryModel(
                 id=UniqueEntityId().id,
-                name='a',
+                name='abc',
                 **default_props
             ),
             CategoryModel(
                 id=UniqueEntityId().id,
-                name='d',
+                name='def',
                 **default_props
             ),
             CategoryModel(
                 id=UniqueEntityId().id,
-                name='e',
+                name='efg',
                 **default_props
             ),
             CategoryModel(
                 id=UniqueEntityId().id,
-                name='c',
+                name='cde',
                 **default_props
             )
         ])
@@ -426,4 +424,3 @@ class TestCategoryDjangoRepositoryInt(unittest.TestCase):
             sort_dir='asc',
             filter='TEST'
         ))
-    

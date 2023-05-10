@@ -7,10 +7,9 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 
-django.setup()
 from core.category.infra.django_app.models import CategoryModel
 
-@pytest.mark.django_db
+@pytest.mark.django_db()
 class TestCategoryModelInt(unittest.TestCase):
 
     def test_mapping(self):

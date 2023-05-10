@@ -31,15 +31,15 @@ class TestCategoryInMemoryRepositoryUnit(unittest.TestCase):
             items, 'TEST')
         self.assertListEqual(items_filtered, [items[0], items[1]])
 
-    # def test_sort_by_created_at_when_sort_param_is_null(self):
-    #     items = [
-    #         Category(name='test'),
-    #         Category(name='TEST', created_at=timezone.now() + timedelta(seconds=100)),
-    #         Category(name='fake', created_at=timezone.now() + timedelta(seconds=200)),
-    #     ]
-    #     # pylint: disable=protected-access
-    #     items_filtered = self.repo._apply_sort(items, None, None)
-    #     self.assertListEqual(items_filtered, [items[2], items[1], items[0]])
+    def test_sort_by_created_at_when_sort_param_is_null(self):
+        items = [
+            Category(name='test'),
+            Category(name='TEST', created_at=timezone.now() + timedelta(seconds=100)),
+            Category(name='fake', created_at=timezone.now() + timedelta(seconds=200)),
+        ]
+        # pylint: disable=protected-access
+        items_filtered = self.repo._apply_sort(items, None, None)
+        self.assertListEqual(items_filtered, [items[2], items[1], items[0]])
 
     def test_sort_by_name(self):
         items = [

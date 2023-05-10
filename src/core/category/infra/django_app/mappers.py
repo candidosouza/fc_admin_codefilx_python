@@ -14,7 +14,7 @@ class CategoryModelMapper:
                 name=model.name,
                 description=model.description,
                 is_active=model.is_active,
-                created_at=model.created_at
+                created_at=model.created_at,
             )
         except EntityValidationException as exception:
             raise LoadEntityException(exception.error) from exception
@@ -22,7 +22,7 @@ class CategoryModelMapper:
     @staticmethod
     def to_model(category: Category) -> CategoryModel:
         return CategoryModel(
-            id=UniqueEntityId(str(category.id)),
+            id=category.id,
             name=category.name,
             description=category.description,
             is_active=category.is_active,

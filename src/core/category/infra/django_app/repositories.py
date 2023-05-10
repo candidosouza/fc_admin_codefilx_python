@@ -22,7 +22,7 @@ class CategoryDjangoRepository(CategoryRepository):
     def find_by_id(self, entity_id: str | UniqueEntityId) -> Category:
         id_str = str(entity_id)
         model = self._get(id_str)
-        CategoryModelMapper.to_entity(model)
+        return CategoryModelMapper.to_entity(model)
 
     def find_all(self) -> List[Category]:
         return [CategoryModelMapper.to_entity(model) for model in CategoryModel.objects.all()]

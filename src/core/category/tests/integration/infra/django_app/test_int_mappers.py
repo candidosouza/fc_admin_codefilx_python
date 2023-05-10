@@ -1,8 +1,6 @@
 # pylint: disable=unexpected-keyword-arg,no-member
 import unittest
 import pytest
-import django
-django.setup()
 from django.utils import timezone
 from core.category.infra.django_app.models import CategoryModel
 from core.category.domain.entities import Category
