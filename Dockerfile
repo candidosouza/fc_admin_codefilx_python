@@ -1,4 +1,4 @@
-FROM python:3.10.2
+FROM python:3.11
 
 RUN apt update && apt install -y --no-install-recommends git curl wget \
     && python -m pip install --upgrade pip
