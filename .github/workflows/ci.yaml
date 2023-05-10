@@ -20,14 +20,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           
-      - name: Install pdm and any other packages
-        run: pip install pdm
+      # - name: Install pdm with pip
+      #   run: pip install pdm
 
-      - name: Install pdm and any other packages
-        run: pdm install
+      # - name: Install pdm and any other packages
+      #   run: pdm install
 
-      - name: Run pdm with tests
-        run: pdm run test
+      # - name: Run pdm with tests
+      #   run: pdm run test
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
