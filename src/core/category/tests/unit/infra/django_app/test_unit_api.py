@@ -14,48 +14,72 @@ from core.category.application.use_cases import (
 )
 from core.category.application.dto import CategoryOutput
 from core.category.infra.django_app.api import CategoryResource
+from core.category.infra.django_app.serializers import CategorySerializer
 
 from rest_framework.test import APIRequestFactory
+
+
+class StubCategorySerializer:
+
+    validated_data = None
+
+    def is_valid(self, raise_exception: bool):
+        pass
 
 
 class TestCategoryResourceUnit(unittest.TestCase):
 
     def test_post_method(self):
+        stub_serializer = StubCategorySerializer()
         send_data = {
             'name': 'Movie',
         }
-        mock_create_use_case = mock.Mock(CreateCategoryUseCase)
-        mock_create_use_case.execute.return_value = CreateCategoryUseCase.Output(
-            id='a849156c-fbc3-4dc0-a479-8179c6db099b',
-            name='Movie',
-            description=None,
-            is_active=True,
-            created_at=datetime.now(),
-        )
-        resource = CategoryResource(
-            **{
-                **self.__init_all_none(),
-                'create_use_case': lambda: mock_create_use_case
-            }
-        )
-        _request = APIRequestFactory().post('/categories/', send_data)
-        request = Request(_request)
-        request._full_data = send_data  # pylint: disable=protected-access
-        response = resource.post(request)
-        mock_create_use_case.execute.assert_called_with(
-            CreateCategoryUseCase.Input(
+        with mock.patch.object(
+            CategorySerializer,
+            '__new__',
+            return_value=stub_serializer
+        ) as mock_serializer:
+
+            stub_serializer.validated_data = send_data
+            stub_serializer.is_valid = mock.MagicMock()
+
+            mock_create_use_case = mock.Mock(CreateCategoryUseCase)
+            mock_create_use_case.execute.return_value = CreateCategoryUseCase.Output(
+                id='a849156c-fbc3-4dc0-a479-8179c6db099b',
                 name='Movie',
-            ))
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.data, {
-            'id': 'a849156c-fbc3-4dc0-a479-8179c6db099b',
-            'name': 'Movie',
-            'description': None,
-            'is_active': True,
-            # 'created_at': mock.ANY,
-            # 'created_at': created_at,
-            'created_at': mock_create_use_case.execute.return_value.created_at,
-        })
+                description=None,
+                is_active=True,
+                created_at=datetime.now(),
+            )
+            resource = CategoryResource(
+                **{
+                    **self.__init_all_none(),
+                    'create_use_case': lambda: mock_create_use_case
+                }
+            )
+            _request = APIRequestFactory().post('/categories/', send_data)
+            request = Request(_request)
+            request._full_data = send_data  # pylint: disable=protected-access
+            response = resource.post(request)
+
+            stub_serializer.is_valid.assert_called_with(raise_exception=True)
+
+            mock_create_use_case.execute.assert_called_with(
+                CreateCategoryUseCase.Input(
+                    name='Movie',
+                ))
+            self.assertEqual(response.status_code, 201)
+            self.assertEqual(response.data, {
+                'id': 'a849156c-fbc3-4dc0-a479-8179c6db099b',
+                'name': 'Movie',
+                'description': None,
+                'is_active': True,
+                # 'created_at': mock.ANY,
+                # 'created_at': created_at,
+                'created_at': mock_create_use_case.execute.return_value.created_at,
+            })
+
+        mock_serializer.assert_called_with(CategorySerializer, data=send_data)
 
     def test_list_method(self):
         mock_list_use_case = mock.Mock(ListCategoriesUseCase)
