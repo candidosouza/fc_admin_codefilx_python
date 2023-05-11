@@ -1,6 +1,6 @@
 from typing import List
-from core.category.domain.entities import Category
 from core.__seedwork.domain.repositories import InMemorySearchableRepository
+from core.category.domain.entities import Category
 from core.category.domain.repositories import CategoryRepository
 
 

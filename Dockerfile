@@ -1,4 +1,4 @@
-FROM python:3.10.2
+FROM python:3.11
 
 RUN apt update && apt install -y --no-install-recommends git curl wget \
     && python -m pip install --upgrade pip
@@ -12,7 +12,7 @@ USER python
 
 WORKDIR /home/python/app
 
-ENV MY_PYTHON_PACKAGES=/home/python/app/__pypackages__/3.10
+ENV MY_PYTHON_PACKAGES=/home/python/app/__pypackages__/3.11
 ENV PYTHONPATH=${PYTHONPATH}/home/python/app/src
 ENV PATH $PATH:${MY_PYTHON_PACKAGES}/bin
 
