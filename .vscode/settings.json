@@ -1,29 +1,62 @@
 {
-    "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#2f7c47",
-        "activityBar.background": "#2f7c47",
-        "activityBar.foreground": "#e7e7e7",
-        "activityBar.inactiveForeground": "#e7e7e799",
-        "activityBarBadge.background": "#422c74",
-        "activityBarBadge.foreground": "#e7e7e7",
-        "commandCenter.border": "#e7e7e799",
-        "sash.hoverBorder": "#2f7c47",
-        "statusBar.background": "#215732",
-        "statusBar.foreground": "#e7e7e7",
-        "statusBarItem.hoverBackground": "#2f7c47",
-        "statusBarItem.remoteBackground": "#215732",
-        "statusBarItem.remoteForeground": "#e7e7e7",
-        "titleBar.activeBackground": "#215732",
-        "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.inactiveBackground": "#21573299",
-        "titleBar.inactiveForeground": "#e7e7e799"
-    },
-    "peacock.remoteColor": "#215732",
-    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintPath": "pylint",
+    "python.linting.pylintArgs": [
+        "--disable=C0111"
+    ],
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/__pypackages__/3.10/lib"
+    ],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/__pypackages__/3.10/lib"
+    ],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.indexing": true,
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "django",
+            "includeAllSymbols": true,
+            "depth": 10
+        },
+        {
+            "name": "rest_framework",
+            "includeAllSymbols": true,
+            "depth": 10
+        },
+        {
+            "name": "core",
+            "includeAllSymbols": true,
+            "depth": 10
+        },
+    ],
+    "peacock.remoteColor": "#25415d",
+    "python.testing.pytestArgs": [
+        "src",
+        "--ignore",
+        "__pypackages__",
+        "-s"
+    ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.autopep8"
-    },
-    "python.formatting.provider": "none",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBorder": "#441b30",
+        "activityBar.activeBackground": "#345a81",
+        "activityBar.background": "#345a81",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#441b30",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#345a81",
+        "statusBar.background": "#25415d",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#345a81",
+        "statusBarItem.remoteBackground": "#25415d",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#25415d",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#25415d99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    }
 }
