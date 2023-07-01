@@ -25,15 +25,23 @@ jobs:
 
       # - name: Run tox with tests
       #   run: tox -e py
+      - name: Up containers
+        run: docker-compose up -d
 
-      - name: Install pdm with pip
-        run: pip install pdm
+      - name: Waiting environment to be ready
+        run: wget -qO- https://raw.githubusercontent.com/eficode/wait-for/v2.1.3/wait-for | sh -s -- http://localhost:8000 -- echo success
 
-      - name: Install pdm and any other packages
-        run: pdm install
+      - name: Running tests
+        run: docker-compose exec -T app pytest --ignore __pypackages__
 
-      - name: Run pdm with tests
-        run: pdm run test
+      # - name: Install pdm with pip
+      #   run: pip install pdm
+
+      # - name: Install pdm and any other packages
+      #   run: pdm install
+
+      # - name: Run pdm with tests
+      #   run: pdm run test
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
