@@ -25,7 +25,7 @@ dependencies = [
     # "colorama>=0.4.6",
 ]
 
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 license = {text = "n"}
 [project.optional-dependencies]
 
@@ -34,20 +34,20 @@ license = {text = "n"}
 dev = [
     "autopep8>=1.6.0",
     # "pylint>=2.13.0",
-    # "pytest>=7.1.1",
+    "pytest>=7.1.1",
     # "pytest-cov>=3.0.0",
     # "pytest-django>=4.5.2",
     # "model-bakery>=1.6.0",
     # "faker>=15.0.0",
 ]
 [tool.pdm.scripts]
-manage="python ./src/django_app/manage.py"
-runserver = "pdm run manage runserver 0.0.0.0:8000"
-pep8 = "autopep8 --in-place --recursive ./src"
-pylint = "pylint ./src"
+# manage="python ./src/django_app/manage.py"
+# runserver = "pdm run manage runserver 0.0.0.0:8000"
+# pep8 = "autopep8 --in-place --recursive ./src"
+# pylint = "pylint ./src"
 test = "pytest --ignore __pypackages__"
-test_cov = "pdm run test --cov ./src --cov-fail-under 80"
-test_cov_html = "pdm run test_cov --cov-report html:./__coverage"
+# test_cov = "pdm run test --cov ./src --cov-fail-under 80"
+# test_cov_html = "pdm run test_cov --cov-report html:./__coverage"
 [build-system]
 requires = ["pdm-pep517>=0.12.0"]
 build-backend = "pdm.pep517.api"

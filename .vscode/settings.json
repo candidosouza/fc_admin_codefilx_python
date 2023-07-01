@@ -14,18 +14,23 @@
     "python.analysis.autoImportCompletions": true,
     "python.analysis.indexing": true,
     "python.analysis.packageIndexDepths": [
+        // {
+        //     "name": "django",
+        //     "includeAllSymbols": true,
+        //     "depth": 10
+        // },
+        // {
+        //     "name": "rest_framework",
+        //     "includeAllSymbols": true,
+        //     "depth": 10
+        // },
+        // {
+        //     "name": "core",
+        //     "includeAllSymbols": true,
+        //     "depth": 10
+        // },
         {
-            "name": "django",
-            "includeAllSymbols": true,
-            "depth": 10
-        },
-        {
-            "name": "rest_framework",
-            "includeAllSymbols": true,
-            "depth": 10
-        },
-        {
-            "name": "core",
+            "name": "src",
             "includeAllSymbols": true,
             "depth": 10
         },
