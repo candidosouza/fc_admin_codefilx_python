@@ -1,6 +1,4 @@
 .history/
-.devcontainer/
-.vscode/
 *.pyc
 .docker/zsh/history/.zsh_history
 elasticsearch_data/
