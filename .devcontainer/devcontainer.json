@@ -39,10 +39,9 @@
 	"extensions": [
 		"ms-python.python",
 		"sourcery.sourcery", // para dicas no python sobre refatoração entre outros
-		"sonarsource.sonarlint-vscode", // análise de qualidade de código
+		"SonarSource.sonarlint-vscode", // análise de qualidade de código
 		"github.copilot", // nosso copiloto, sem comentários...
 		"visualstudioexptteam.vscodeintellicode",
-		"eamodio.gitlens",
 		"vivaxy.vscode-conventional-commits",
 		"ms-azuretools.vscode-docker", // para ver tudo sobre o docker, container, imagens, tec...
 		"jebbs.plantuml", // para diagramas uml
@@ -55,6 +54,7 @@
 		"ms-kubernetes-tools.vscode-kubernetes-tools", //para o kubernetes e tal...
 		"humao.rest-client", // para rodar requisições http 
 		"bungcip.better-toml", //para arquivos toml
+		"ms-python.pylint"
 	],
 
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.

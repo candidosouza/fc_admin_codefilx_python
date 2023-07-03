@@ -11,7 +11,7 @@ RUN apt update && apt install -y --no-install-recommends \
                     libmariadb-dev
 
 RUN useradd -ms /bin/bash python
-
+RUN python -m pip install --upgrade pip
 RUN pip install pdm
 
 USER python
